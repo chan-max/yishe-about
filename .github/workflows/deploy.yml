@@ -1,0 +1,134 @@
+name: Deploy to Tencent Cloud
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "package.json"
+  workflow_dispatch:
+
+concurrency:
+  group: yishe-about-deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check package version changed
+        id: version_check
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "current_version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          PREVIOUS_CONTENT=$(git show HEAD^:package.json 2>/dev/null || true)
+
+          if [ -z "$PREVIOUS_CONTENT" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "current_version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          PREVIOUS_VERSION=$(printf '%s' "$PREVIOUS_CONTENT" | node -e "let data=''; process.stdin.on('data', c => data += c); process.stdin.on('end', () => console.log(JSON.parse(data).version || ''))")
+
+          if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          echo "current_version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
+          echo "previous_version=$PREVIOUS_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Node.js
+        if: steps.version_check.outputs.changed == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        if: steps.version_check.outputs.changed == 'true'
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Build
+        if: steps.version_check.outputs.changed == 'true'
+        run: npm run build
+
+      - name: Package build artifacts
+        if: steps.version_check.outputs.changed == 'true'
+        run: tar -czf dist.tar.gz .vitepress/dist
+
+      - name: Upload package to Tencent Cloud
+        if: steps.version_check.outputs.changed == 'true'
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: 22
+          source: "dist.tar.gz"
+          target: "/tmp"
+          command_timeout: "10m"
+          timeout: "10m"
+          debug: true
+
+      - name: Extract package on Tencent Cloud
+        if: steps.version_check.outputs.changed == 'true'
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: 22
+          script: |
+            mkdir -p /www/wwwroot/about.1s.design
+            tar -xzf /tmp/dist.tar.gz -C /tmp
+            rm -rf /www/wwwroot/about.1s.design/*
+            cp -r /tmp/.vitepress/dist/. /www/wwwroot/about.1s.design/
+            rm -rf /tmp/.vitepress
+            rm -f /tmp/dist.tar.gz
+          command_timeout: "10m"
+          timeout: "10m"
+          debug: true
+
+      - name: Skip deploy when package version is unchanged
+        if: steps.version_check.outputs.changed != 'true'
+        run: echo "package.json version unchanged, skipping build and deploy."
+
+      - name: Send Feishu Notification
+        if: always()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const status = '${{ job.status }}';
+            const emoji = status === 'success' ? '🚀' : '❌';
+            const skipped = '${{ steps.version_check.outputs.changed }}' !== 'true';
+            const versionText = skipped
+              ? '版本号未变化，已跳过编译部署'
+              : `部署版本: ${{ steps.version_check.outputs.current_version }}`;
+            const message = {
+              msg_type: "text",
+              content: {
+                text: `${emoji} 衣设介绍页部署${status === 'success' ? '成功' : '失败'}通知\n\n项目: ${{ github.repository }}\n分支: ${{ github.ref }}\n提交者: ${{ github.actor }}\n提交信息: ${{ github.event.head_commit.message }}\n${versionText}\n部署时间: ${new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })}\n状态: ${status === 'success' ? '✅ 成功' : '❌ 失败'}`
+              }
+            };
+
+            await fetch('${{ secrets.FEISHU_WEBHOOK_URL }}', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(message)
+            });

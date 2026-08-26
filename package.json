@@ -1,10 +1,8 @@
 {
-	"name": "vite-docs-cn",
-	"version": "8.2.2",
-	"description": "Vite.js documentation Chinese translation.",
-	"repository": "https://github.com/vitejs/docs-cn",
+	"name": "yishe-about",
+	"version": "1.0.0",
+	"description": "衣设 1s.design 项目介绍页",
 	"type": "module",
-	"author": "Evan You",
 	"private": true,
 	"license": "CC BY-NC-SA 4.0",
 	"devDependencies": {
