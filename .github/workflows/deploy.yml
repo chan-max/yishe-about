@@ -54,7 +54,7 @@ jobs:
         if: steps.version_check.outputs.changed == 'true'
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
           cache-dependency-path: package-lock.json
 
@@ -106,29 +106,3 @@ jobs:
       - name: Skip deploy when package version is unchanged
         if: steps.version_check.outputs.changed != 'true'
         run: echo "package.json version unchanged, skipping build and deploy."
-
-      - name: Send Feishu Notification
-        if: always()
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const status = '${{ job.status }}';
-            const emoji = status === 'success' ? '🚀' : '❌';
-            const skipped = '${{ steps.version_check.outputs.changed }}' !== 'true';
-            const versionText = skipped
-              ? '版本号未变化，已跳过编译部署'
-              : `部署版本: ${{ steps.version_check.outputs.current_version }}`;
-            const message = {
-              msg_type: "text",
-              content: {
-                text: `${emoji} 衣设介绍页部署${status === 'success' ? '成功' : '失败'}通知\n\n项目: ${{ github.repository }}\n分支: ${{ github.ref }}\n提交者: ${{ github.actor }}\n提交信息: ${{ github.event.head_commit.message }}\n${versionText}\n部署时间: ${new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })}\n状态: ${status === 'success' ? '✅ 成功' : '❌ 失败'}`
-              }
-            };
-
-            await fetch('${{ secrets.FEISHU_WEBHOOK_URL }}', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(message)
-            });
