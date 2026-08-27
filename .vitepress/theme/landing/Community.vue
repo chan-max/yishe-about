@@ -95,27 +95,24 @@ const testimonials: Testimonial[] = [
       class="flex flex-col sm:flex-row justify-between items-center gap-8 sm:gap-20 text-center sm:text-left"
     >
       <div class="flex flex-col gap-3">
-        <h3 class="text-white max-w-xl text-balance">深受社区喜爱</h3>
+        <h3 class="text-white max-w-xl text-balance">设计理念</h3>
         <p class="max-w-md text-white/70 text-balance">
-          不要只听我们说 —— 来听听 Vite 社区成员的声音
+          艺术来源于生活，又回归生活
         </p>
       </div>
       <div
         class="flex gap-8 sm:gap-12 items-start justify-center sm:justify-start sm:pr-20"
       >
-        <!-- GitHub Stars -->
+        <!-- 子系统数量 -->
         <div class="flex flex-col gap-3">
-          <h2 class="text-white">80k+</h2>
-          <p class="text-grey flex items-center gap-2">
-            <Icon icon="simple-icons:github" width="20px" height="20px" />
-            Github Stars
-          </p>
+          <h2 class="text-white">6</h2>
+          <p class="text-grey">核心子系统</p>
         </div>
 
-        <!-- NPM Downloads -->
+        <!-- AI 工具 -->
         <div class="flex flex-col gap-3">
-          <h2 class="text-white">80m+</h2>
-          <p class="text-grey">每周 NPM 下载量</p>
+          <h2 class="text-white">150+</h2>
+          <p class="text-grey">AI 工具集成</p>
         </div>
       </div>
     </div>

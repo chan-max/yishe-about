@@ -14,11 +14,9 @@ if (typeof document !== 'undefined') {
 }
 
 const installTabs = [
-  { label: 'npm', code: 'npm create vite@latest', prefix: '$ ' },
-  { label: 'Yarn', code: 'yarn create vite', prefix: '$ ' },
-  { label: 'pnpm', code: 'pnpm create vite', prefix: '$ ' },
-  { label: 'Bun', code: 'bun create vite', prefix: '$ ' },
-  { label: 'Deno', code: 'deno init --npm vite', prefix: '$ ' },
+  { label: '设计', code: 'AI 智能设计助手', prefix: '' },
+  { label: '电商', code: '多平台一键发布', prefix: '' },
+  { label: '独立站', code: '9 品牌站点矩阵', prefix: '' },
 ]
 </script>
 
@@ -32,37 +30,31 @@ const installTabs = [
       <div
         class="flex flex-col gap-5 items-center md:items-start text-center md:text-left"
       >
-        <a
-          class="flex items-center gap-2"
-          href="https://voidzero.dev"
-          target="_blank"
-        >
-          <span class="text-grey text-xs font-mono uppercase tracking-wide"
-            >By</span
-          >
-          <img
-            src="@assets/logos/voidzero-light.svg"
-            alt="VoidZero"
-            class="h-2.5"
-          />
-        </a>
         <h1 class="text-white text-pretty max-w-[25rem]">
-          面向 Web 的 <br /> 构建工具
+          衣设 <span class="text-[var(--color-brand)]">1s.design</span>
         </h1>
         <p class="text-white/70 md:text-lg max-w-[27rem] text-pretty">
-          Vite 是一款速度极快的前端构建工具 <br /> 为下一代 Web 应用程序提供支持
+          AI 驱动的设计工作流 <br /> 让创意更快落地
+        </p>
+        <p class="text-white/50 text-sm max-w-[27rem] text-pretty">
+          艺术来源于生活，又回归生活
         </p>
         <div class="flex items-center gap-5 mt-8">
-          <a href="/guide/" class="button button--primary inline-block w-fit">
-            开始
+          <a
+            href="https://1s.design"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="button button--primary inline-block w-fit"
+          >
+            访问主站
           </a>
           <a
-            href="https://github.com/vitejs/vite"
+            href="https://github.com/chan-max"
             target="_blank"
             rel="noopener noreferrer"
             class="button inline-block w-fit"
           >
-            在 GitHub 上查看
+            GitHub
           </a>
         </div>
       </div>

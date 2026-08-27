@@ -1,6 +1,6 @@
 ---
-title: Vite
-titleTemplate: 下一代的前端工具链
+title: 衣设
+titleTemplate: AI 驱动的设计工作流
 layout: home
 theme: dark
 ---

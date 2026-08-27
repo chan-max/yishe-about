@@ -26,25 +26,20 @@ const sponsors = computed(
     :logos="['openai', 'shopify', 'stripe', 'linear', 'clickup', 'wiz']"
   />
   <HeadingSection
-    heading="重新诠释开发者体验"
-    subheading="Vite 让 Web 开发再次充满乐趣"
+    heading="AI 重塑设计工作流"
+    subheading="让创意更快落地，让设计更有价值"
   />
   <ViteFeatureGrid1 />
-  <HeadingSection heading="共同构建的坚实基础" />
+  <HeadingSection heading="完整的技术栈" />
   <ViteFeatureGrid2 />
-  <HeadingSection heading="支持你喜爱的框架和工具" />
+  <HeadingSection heading="多端协同生态" />
   <ViteFrameworks />
   <ViteCommunity />
-  <Sponsors
-    heading="免费 & 开源"
-    sponsor-link-text="成为赞助商"
-    description="Vite 采用 MIT 许可协议，将始终保持免费开源。这得益于我们的贡献者及以下企业的支持："
-   :sponsors="sponsors" />
   <Spacer />
   <Footer
-    heading="使用 Vite 开始构建"
-    subheading="准备好迎接一个能跟上你思维速度的开发环境"
-    button-text="开始"
-    button-link="/guide/"
+    heading="探索衣设"
+    subheading="从设计到发布，一站式 AI 驱动平台"
+    button-text="访问主站"
+    button-link="https://1s.design"
   />
 </template>

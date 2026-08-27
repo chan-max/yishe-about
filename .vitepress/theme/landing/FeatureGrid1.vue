@@ -10,10 +10,10 @@ import viteAnimation from '@assets/vite/animations/563_x_420_rich_features.riv'
     <div class="flex flex-col gap-3 justify-between">
       <div class="p-5 sm:p-10 flex flex-col gap-3">
         <h5 class="text-balance sm:text-pretty text-white">
-          极速的服务启动
+          AI 智能设计
         </h5>
         <p class="sm:max-w-[28rem] text-pretty">
-          通过原生 ESM 提供源文件按需加载，并具有极快的依赖项预打包速度。
+          基于 LangGraph 的 AI Agent，集成 150+ 工具，支持文生图、智能排版、设计建议。
         </p>
       </div>
       <div class="relative p-10 sm:p-15 flex justify-center bg-[#370a7f]">
@@ -38,9 +38,9 @@ import viteAnimation from '@assets/vite/animations/563_x_420_rich_features.riv'
 
     <div class="flex flex-col gap-3 justify-between border-r-0">
       <div class="p-5 sm:p-10 flex flex-col gap-3">
-        <h5 class="text-white">闪电般快速的 HMR</h5>
+        <h5 class="text-white">可视化工作流</h5>
         <p class="max-w-[26rem] text-pretty">
-          无论你的应用有多大，保存时都能立即响应更改。
+          自研 100+ 节点类型的工作流引擎，可视化拖拽配置自动化流程。
         </p>
       </div>
       <div class="flex justify-end">
@@ -57,9 +57,9 @@ import viteAnimation from '@assets/vite/animations/563_x_420_rich_features.riv'
     </div>
 
     <div class="p-5 sm:p-10 pb-0 sm:pb-0 flex flex-col gap-3 lg:border-b-0">
-      <h5 class="text-white">丰富的开箱即用功能</h5>
+      <h5 class="text-white">多平台电商集成</h5>
       <p class="sm:max-w-[28rem] text-pretty">
-        TypeScript, JSX, CSS, Workers, WebAssembly... 只需一个插件即可使用
+        支持 Temu、Amazon、拼多多、1688 等 17+ 平台，一键发布商品。
       </p>
       <RiveAnimation
         :desktop-src="viteAnimation"
@@ -74,9 +74,9 @@ import viteAnimation from '@assets/vite/animations/563_x_420_rich_features.riv'
 
     <div class="flex flex-col gap-3 justify-between border-r-0 border-b-0">
       <div class="p-5 sm:p-10 flex flex-col gap-3">
-        <h5 class="text-white">构建优化</h5>
+        <h5 class="text-white">向量检索</h5>
         <p class="max-w-[25rem] text-pretty">
-          由 Rolldown 提供支持的 tree-shaking、内置压缩、精细分块控制。
+          集成 Qdrant 向量搜索引擎，支持百万级素材的以图搜图。
         </p>
       </div>
       <div class="relative p-10 sm:p-15 flex justify-center bg-[#370a7f]">
