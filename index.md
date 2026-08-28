@@ -1,6 +1,6 @@
 ---
-title: 衣设
-titleTemplate: AI 驱动的设计工作流
+title: 衣设 1s.design
+titleTemplate: 下一代 AI 驱动的 POD 创意设计与柔性智造全链路生态
 layout: home
 theme: dark
 ---

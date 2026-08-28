@@ -14,9 +14,12 @@ if (typeof document !== 'undefined') {
 }
 
 const installTabs = [
-  { label: '设计', code: 'AI 智能设计助手', prefix: '' },
-  { label: '电商', code: '多平台一键发布', prefix: '' },
-  { label: '独立站', code: '9 品牌站点矩阵', prefix: '' },
+  { label: '衣设设计工具', code: 'http://tool.1s.design · 毫秒级极速 AI 画布与多模态智能排版引擎', prefix: '' },
+  { label: '衣设定制商城', code: 'https://1s.design · 9 大垂直品类高性能出海独立站集群', prefix: '' },
+  { label: '衣设管理后台', code: 'http://admin.1s.design · 全渠道多租户 SaaS 柔性供应链中台', prefix: '' },
+  { label: '衣设后端服务', code: 'http://api.1s.design · 分布式 AI 渲染与 Agent 算力中枢', prefix: '' },
+  { label: '衣设桌面客户端', code: 'Windows / macOS · 跨平台桌面生产力终端与端侧离线推理', prefix: '' },
+  { label: '衣设扩展系统', code: 'Chrome Extension · 工业级插件与电商采集打样套件', prefix: '' },
 ]
 </script>
 
@@ -34,27 +37,27 @@ const installTabs = [
           衣设 <span class="text-[var(--color-brand)]">1s.design</span>
         </h1>
         <p class="text-white/70 md:text-lg max-w-[27rem] text-pretty">
-          AI 驱动的设计工作流 <br /> 让创意更快落地
+          下一代 AI 驱动的 POD 创意设计生态 <br /> 重新定义全球柔性智造全链路
         </p>
         <p class="text-white/50 text-sm max-w-[27rem] text-pretty">
-          艺术来源于生活，又回归生活
+          艺术来源于生活，又回归生活 · 创意即产品，设计即所得
         </p>
-        <div class="flex items-center gap-5 mt-8">
+        <div class="flex items-center gap-4 mt-8 flex-wrap">
           <a
-            href="https://1s.design"
+            href="http://tool.1s.design"
             target="_blank"
             rel="noopener noreferrer"
             class="button button--primary inline-block w-fit"
           >
-            访问主站
+            🎨 进入设计工具 (tool)
           </a>
           <a
-            href="https://github.com/chan-max"
+            href="https://1s.design"
             target="_blank"
             rel="noopener noreferrer"
             class="button inline-block w-fit"
           >
-            GitHub
+            🛍️ 访问定制商城 (1s)
           </a>
         </div>
       </div>

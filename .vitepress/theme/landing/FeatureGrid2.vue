@@ -9,10 +9,10 @@ import flexiblePluginAnimation from '@assets/vite/animations/640_x_300_flexible_
   >
     <div class="p-5 sm:p-10 flex flex-col gap-3">
       <h5 class="text-balance sm:text-pretty text-white">
-        多站点矩阵
+        yishe-nuxt · 9 大垂直品类独立站矩阵
       </h5>
       <p class="sm:max-w-[28rem] text-pretty">
-        一套代码驱动 9 个品牌站点，配置化方案实现多品牌独立运营。
+        一套自研现代化架构强力驱动服装、马克杯、装饰画、厨具、钥匙扣、鼠标垫等 9 大出海垂直品牌独立站，极致 SEO 与秒级首屏加载，赋能全球品牌出海。
       </p>
       <RiveAnimation
         :desktop-src="flexiblePluginAnimation"
@@ -24,8 +24,10 @@ import flexiblePluginAnimation from '@assets/vite/animations/640_x_300_flexible_
 
     <div class="flex flex-col gap-3 border-r-0 justify-between">
       <div class="p-5 sm:p-10 flex flex-col gap-3">
-        <h5 class="text-white">桌面客户端</h5>
-        <p class="max-w-[26rem] text-pretty">Electron 跨平台桌面应用，集成浏览器自动化与视频渲染。</p>
+        <h5 class="text-white">yishe-client · 跨平台桌面生产力终端</h5>
+        <p class="max-w-[26rem] text-pretty">
+          基于 Electron 与底层原生硬件加速构建的桌面神器，内置浏览器自动化矩阵、批量图片多线程合成与超清营销视频秒级渲染。
+        </p>
       </div>
       <div class="relative p-5 sm:p-10 flex justify-center bg-[#370a7f]">
         <img
@@ -48,9 +50,9 @@ import flexiblePluginAnimation from '@assets/vite/animations/640_x_300_flexible_
     </div>
 
     <div class="p-5 sm:p-10 flex flex-col gap-3 lg:border-b-0">
-      <h5 class="text-white">MCP 协议集成</h5>
+      <h5 class="text-white">yishe-extensions · PS 工业插件与浏览器套件</h5>
       <p class="sm:max-w-[28rem] text-pretty mb-12 sm:mb-16">
-        支持 Model Context Protocol，实现云端与本地工具的统一调度。
+        无缝打通 Adobe Photoshop 专业工业级设计链路，配合多浏览器生态扩展，实现一键全网爆款灵感采集、智能图层解析与多平台自动化快速打样。
       </p>
       <img
         src="@assets/vite/vite-ssr-support.png"
@@ -64,9 +66,9 @@ import flexiblePluginAnimation from '@assets/vite/animations/640_x_300_flexible_
 
     <div class="flex flex-col gap-3 justify-between">
       <div class="p-5 sm:p-10 flex flex-col gap-3">
-        <h5 class="text-white">本地 AI 推理</h5>
+        <h5 class="text-white">端云协同 · 离线 AI 推理与 MCP 协议</h5>
         <p class="max-w-[25rem] text-pretty">
-          基于 HuggingFace Transformers.js 的本地模型推理，支持离线运行。
+          全面支持 Model Context Protocol 协议与本地 Transformers.js 模型离线推理，断网环境下依然稳定实现高清抠图、矢量重构与工具链无缝调度。
         </p>
       </div>
       <div class="px-5 sm:px-10 flex justify-center">

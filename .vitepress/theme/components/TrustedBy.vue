@@ -16,7 +16,7 @@ const logos = props.logos.map((name) => ({
     class="wrapper wrapper--ticks border-t px-10 py-6 md:py-8 flex flex-col justify-center gap-5"
   >
     <h6 class="text-center md:text-start text-white">
-      深受全球顶尖软件团队信赖
+      深受全球创新品牌、跨境出海卖家与柔性智造供应链信赖
     </h6>
   </section>
   <section class="wrapper wrapper--ticks border-t">

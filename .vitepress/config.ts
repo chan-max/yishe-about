@@ -17,76 +17,50 @@ import { buildEnd } from './buildEnd.config.ts'
 const viteVersion = packageJson.version
 const viteMajorVersion = +viteVersion.split('.')[0]
 
-const ogDescription = 'Next Generation Frontend Tooling'
-const ogImage = 'https://vite.dev/og-image.jpg'
-const ogTitle = 'Vite'
-const ogUrl = 'https://vite.dev'
+const ogDescription = '衣设 1s.design - 下一代 AI 驱动的 POD 创意设计与柔性智造全链路生态'
+const ogImage = 'https://1s.design/og-image.jpg'
+const ogTitle = '衣设 1s.design'
+const ogUrl = 'https://1s.design'
 
 // netlify envs
-const commitRef = process.env.COMMIT_REF?.slice(0, 8) || 'dev'
+const commitRef = process.env.COMMIT_REF?.slice(0, 8) || 'v2.0.0'
 
 const versionLinks = (() => {
   const links: FooterLink[] = []
-
-  // Create version links from v2 onwards
-  for (let i = viteMajorVersion - 1; i >= 2; i--) {
-    links.push({
-      text: `Vite ${i} Docs`,
-      link: `https://v${i}.vite.dev`
-    })
-  }
-
   return links
 })()
 
 const config = defineConfig({
-  title: 'Vite 官方中文文档',
-  description: '下一代前端工具链',
+  title: '衣设 1s.design',
+  description: '下一代 AI 驱动的 POD 创意设计与柔性智造全链路生态',
   lang: 'zh-CN',
   cleanUrls: true,
   sitemap: {
-    hostname: 'https://cn.vite.dev',
+    hostname: 'https://1s.design',
   },
   head: [
     [
       'link',
-      { rel: 'icon', type: 'image/svg+xml', href: '/logo-without-border.svg' },
+      { rel: 'icon', type: 'image/png', href: '/favicon.png' },
     ],
     [
       'link',
       { rel: 'alternate', type: 'application/rss+xml', href: '/blog.rss' }
     ],
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
-    ['link', { rel: 'me', href: 'https://m.webtoo.ls/@vite' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: ogTitle }],
     ['meta', { property: 'og:image', content: ogImage }],
     ['meta', { property: 'og:url', content: ogUrl }],
     ['meta', { property: 'og:description', content: ogDescription }],
-    ['meta', { property: 'og:site_name', content: 'vitejs' }],
+    ['meta', { property: 'og:site_name', content: '衣设 1s.design' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:site', content: '@vite_js' }],
     ['meta', { name: 'theme-color', content: '#646cff' }],
-    [
-      'script',
-      {
-        src: 'https://cdn.usefathom.com/script.js',
-        'data-site': 'TPLGJZGR',
-        'data-spa': 'auto',
-        defer: ''
-      }
-    ]
   ],
 
   locales: {
     root: { label: '简体中文' },
-    en: { label: 'English', link: 'https://vite.dev' },
-    ja: { label: '日本語', link: 'https://ja.vite.dev' },
-    es: { label: 'Español', link: 'https://es.vite.dev' },
-    pt: { label: 'Português', link: 'https://pt.vite.dev' },
-    ko: { label: '한국어', link: 'https://ko.vite.dev' },
-    de: { label: 'Deutsch', link: 'https://de.vite.dev' },
-    fa: { label: 'فارسی', link: 'https://fa.vite.dev' }
+    en: { label: 'English', link: 'https://1s.design' },
   },
 
   themeConfig: {
@@ -94,13 +68,13 @@ const config = defineConfig({
     darkModeSwitchTitle: '切换到深色模式',
     variant: 'vite',
     banner: {
-      id: 'cloudflare-supports-vite',
-      text: 'Cloudflare 支持 Vite 的使命',
-      url: '/blog/cloudflare-supports-vite',
+      id: 'yishe-v2-release',
+      text: '🔥 衣设 2.0 全生态矩阵发布：开启 AI 驱动的 POD 柔性智造新纪元',
+      url: 'https://1s.design',
     },
 
     editLink: {
-      pattern: 'https://github.com/vitejs/docs-cn/edit/main/:path',
+      pattern: 'https://github.com/chan-max/yishe-about/edit/main/:path',
       text: '为此页提供修改建议'
     },
 
@@ -110,11 +84,7 @@ const config = defineConfig({
     },
 
     socialLinks: [
-      { icon: 'bluesky', link: 'https://bsky.app/profile/vite.dev' },
-      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@vite' },
-      { icon: 'x', link: 'https://x.com/vite_js' },
-      { icon: 'discord', link: 'https://chat.vite.dev' },
-      { icon: 'github', link: 'https://github.com/vitejs/vite' }
+      { icon: 'github', link: 'https://github.com/chan-max' }
     ],
 
     search: {
@@ -122,8 +92,8 @@ const config = defineConfig({
       options: {
         translations: {
           button: {
-            buttonText: '搜索',
-            buttonAriaLabel: '搜索'
+            buttonText: '搜索生态',
+            buttonAriaLabel: '搜索生态'
           },
           modal: {
             displayDetails: '显示详细列表',
@@ -144,120 +114,56 @@ const config = defineConfig({
       next: '下一页'
     },
 
-    // Using WwAds for China
-    // carbonAds: {
-    //   code: 'CEBIEK3N',
-    //   placement: 'vitejsdev',
-    // },
-
     footer: {
-      copyright: `© 2019-present VoidZero Inc. and Vite contributors. (${commitRef})`,
+      copyright: `© 2026 衣设 1s.design. All rights reserved. 艺术来源于生活，又回归生活。`,
       nav: [
         {
-          title: 'Vite',
+          title: '衣设生态矩阵',
           items: [
-            { text: '指引', link: '/guide/' },
-            { text: '配置', link: '/config/' },
-            { text: '插件', link: '/plugins/' },
+            { text: '衣设设计工具', link: 'http://tool.1s.design' },
+            { text: '衣设定制商城', link: 'https://1s.design' },
+            { text: '衣设管理后台系统', link: 'http://admin.1s.design' },
+            { text: '衣设后端服务', link: 'http://api.1s.design' },
+            { text: '衣设品牌官网', link: 'http://about.1s.design' },
           ],
         },
         {
-          title: '相关链接',
+          title: '资源与下载',
           items: [
-            { text: '团队成员', link: '/team' },
-            { text: '最新博客', link: '/blog' },
-            {
-              text: 'Releases',
-              link: 'https://github.com/vitejs/vite/releases',
-            },
+            { text: '客户端下载 (Windows/macOS)', link: 'https://gh-proxy.org/https://github.com/1s-design/yishe-client/releases/latest/download/yishe-client.exe' },
+            { text: 'Chrome 扩展插件下载', link: 'https://gh-proxy.org/https://github.com/1s-design/yishe-extensions/releases/latest/download/yishe-extensions.zip' },
+            { text: '生态指引', link: '/guide/' },
+            { text: '设计理念', link: '/guide/philosophy' },
           ],
         },
         {
-          title: 'Versions',
-          items: versionLinks,
+          title: '关注与协同',
+          items: [
+            { text: 'GitHub 仓库', link: 'https://github.com/chan-max' },
+            { text: '1s.design 官方商城', link: 'https://1s.design' },
+          ],
         },
       ],
       social: [
-        { icon: 'github', link: 'https://github.com/vitejs/vite' },
-        { icon: 'discord', link: 'https://chat.vite.dev' },
-        { icon: 'bluesky', link: 'https://bsky.app/profile/vite.dev' },
-        { icon: 'x', link: 'https://x.com/vite_js' },
+        { icon: 'github', link: 'https://github.com/chan-max' },
       ],
     },
 
     nav: [
-      { text: '指引', link: '/guide/', activeMatch: '/guide/' },
-      { text: '配置', link: '/config/', activeMatch: '/config/' },
-      { text: '插件', link: '/plugins/', activeMatch: '/plugins/' },
+      { text: '生态指引', link: '/guide/', activeMatch: '/guide/' },
+      { text: '配置体系', link: '/config/', activeMatch: '/config/' },
+      { text: '智能插件', link: '/plugins/', activeMatch: '/plugins/' },
       {
-        text: '相关链接',
+        text: '生态矩阵',
         items: [
-          { text: '团队成员', link: '/team' },
-          { text: '最新博客', link: '/blog' },
-          { text: '发布策略', link: '/releases' },
-          { text: '致谢', link: '/acknowledgements' },
-          {
-            text: '行为守则',
-            link: 'https://github.com/vitejs/.github/blob/main/CODE_OF_CONDUCT.md',
-          },
-          {
-            text: '插件注册',
-            link: 'https://registry.vite.dev/plugins',
-          },
-          {
-            text: '纪录片',
-            link: 'https://www.youtube.com/watch?v=bmWQqAKLgT4',
-          },
-          {
-            items: [
-              {
-                text: 'Bluesky',
-                link: 'https://bsky.app/profile/vite.dev'
-              },
-              {
-                text: 'Mastodon',
-                link: 'https://elk.zone/m.webtoo.ls/@vite'
-              },
-              {
-                text: 'X',
-                link: 'https://x.com/vite_js'
-              },
-              {
-                text: 'Discord 聊天室',
-                link: 'https://chat.vite.dev'
-              },
-              {
-                text: 'Awesome Vite',
-                link: 'https://github.com/vitejs/awesome-vite'
-              },
-              {
-                text: 'ViteConf',
-                link: 'https://viteconf.org'
-              },
-              {
-                text: 'Dev.to 社区',
-                link: 'https://dev.to/t/vite'
-              }
-            ]
-          }
+          { text: '🎨 衣设设计工具 (tool.1s.design)', link: 'http://tool.1s.design' },
+          { text: '🛍️ 衣设定制商城 (1s.design)', link: 'https://1s.design' },
+          { text: '⚙️ 衣设管理后台系统 (admin.1s.design)', link: 'http://admin.1s.design' },
+          { text: '⚡ 衣设后端服务 (api.1s.design)', link: 'http://api.1s.design' },
+          { text: '🌐 衣设品牌官网 (about.1s.design)', link: 'http://about.1s.design' },
         ]
       },
-      {
-        text: `v${viteVersion}`,
-        items: [
-          {
-            text: '更新日志',
-            link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md'
-          },
-          {
-            text: '贡献指南',
-            link: 'https://github.com/vitejs/vite/blob/main/CONTRIBUTING.md'
-          },
-          {
-            items: versionLinks
-          }
-        ]
-      }
+      { text: '🚀 立即体验设计工具', link: 'http://tool.1s.design' }
     ],
 
     sidebar: {
