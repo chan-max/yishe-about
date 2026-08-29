@@ -68,7 +68,7 @@ const testimonials: Testimonial[] = [
     avatar:
       'https://pbs.twimg.com/profile_images/3380865881/f73b3687ff39b795db05fcaf35972270_400x400.jpeg',
     comment: [
-      '用 yishe-client 的离线推理和一键视频生成功能，我每天能自动制作上百条高清带货视频，店铺曝光量增长了 10 倍！❤️ 给衣设团队。',
+      '用 yishe-client 的离线推理和一键视频生成功能，我每天能自动制作上百条高清带货视频，店铺曝光量增长了 10 倍！',
     ],
   },
   {
@@ -83,7 +83,7 @@ const testimonials: Testimonial[] = [
     handle: '@Chang_Creative · 国际文创品牌联合创始人',
     avatar: 'https://avatars.githubusercontent.com/u/13629190?v=4',
     comment: [
-      '艺术来源于生活，又回归生活。衣设让我们看到了 AI 赋能实体柔性智造的终极形态，这就是未来的超级生产力！🔥',
+      '艺术来源于生活，又回归生活。衣设让我们看到了 AI 赋能实体柔性智造的终极形态，这就是未来的超级生产力！',
     ],
   },
 ]

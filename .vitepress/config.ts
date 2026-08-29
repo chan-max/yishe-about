@@ -69,7 +69,7 @@ const config = defineConfig({
     variant: 'vite',
     banner: {
       id: 'yishe-v2-release',
-      text: '🔥 衣设 2.0 全生态矩阵发布：开启 AI 驱动的 POD 柔性智造新纪元',
+      text: '衣设 2.0 全生态矩阵发布：开启 AI 驱动的 POD 柔性智造新纪元',
       url: 'https://1s.design',
     },
 
@@ -156,14 +156,14 @@ const config = defineConfig({
       {
         text: '生态矩阵',
         items: [
-          { text: '🎨 衣设设计工具 (tool.1s.design)', link: 'http://tool.1s.design' },
-          { text: '🛍️ 衣设定制商城 (1s.design)', link: 'https://1s.design' },
-          { text: '⚙️ 衣设管理后台系统 (admin.1s.design)', link: 'http://admin.1s.design' },
-          { text: '⚡ 衣设后端服务 (api.1s.design)', link: 'http://api.1s.design' },
-          { text: '🌐 衣设品牌官网 (about.1s.design)', link: 'http://about.1s.design' },
+          { text: '衣设设计工具 (tool.1s.design)', link: 'http://tool.1s.design' },
+          { text: '衣设定制商城 (1s.design)', link: 'https://1s.design' },
+          { text: '衣设管理后台系统 (admin.1s.design)', link: 'http://admin.1s.design' },
+          { text: '衣设后端服务 (api.1s.design)', link: 'http://api.1s.design' },
+          { text: '衣设品牌官网 (about.1s.design)', link: 'http://about.1s.design' },
         ]
       },
-      { text: '🚀 立即体验设计工具', link: 'http://tool.1s.design' }
+      { text: '立即体验设计工具', link: 'http://tool.1s.design' }
     ],
 
     sidebar: {
@@ -465,22 +465,6 @@ const config = defineConfig({
           '.gitlab-ci.yml': 'vscode-icons:file-type-gitlab',
         },
       }),
-//       llmstxt({
-//         ignoreFiles: ['blog/*', 'blog.md', 'index.md', 'team.md'],
-//         description: 'The Build Tool for the Web',
-//         details: `\
-// - 💡 Instant Server Start
-// - ⚡️ Lightning Fast HMR
-// - 🛠️ Rich Features
-// - 📦 Optimized Build
-// - 🔩 Universal Plugin Interface
-// - 🔑 Fully Typed APIs
-
-// Vite is a build tool that aims to provide a faster and leaner development experience for modern web projects. It consists of two major parts:
-
-// - A dev server that provides [rich feature enhancements](https://vite.dev/guide/features.md) over [native ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), for example extremely fast [Hot Module Replacement (HMR)](https://vite.dev/guide/features.md#hot-module-replacement).
-
-// - A build command that bundles your code with [Rolldown](https://rolldown.rs), pre-configured to output highly optimized static assets for production.
     ],
     optimizeDeps: {
       include: ['@shikijs/vitepress-twoslash/client'],

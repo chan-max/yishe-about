@@ -49,7 +49,7 @@ const installTabs = [
             rel="noopener noreferrer"
             class="button button--primary inline-block w-fit"
           >
-            🎨 进入设计工具 (tool)
+            进入设计工具 (tool.1s.design)
           </a>
           <a
             href="https://1s.design"
@@ -57,7 +57,7 @@ const installTabs = [
             rel="noopener noreferrer"
             class="button inline-block w-fit"
           >
-            🛍️ 访问定制商城 (1s)
+            访问定制商城 (1s.design)
           </a>
         </div>
       </div>
