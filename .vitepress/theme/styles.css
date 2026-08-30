@@ -4,12 +4,12 @@
 
 /* Vite */
 :root[data-variant='vite'] {
-  --color-brand: #6b1eb9;
+  --color-brand: #6900ff;
 }
 
 :root.dark:not([data-theme])[data-variant='vite'],
 :root[data-theme='dark'][data-variant='vite'] {
-  --color-brand: var(--color-vite);
+  --color-brand: #6900ff;
 }
 
 /* Forced light mode brand for Vite */

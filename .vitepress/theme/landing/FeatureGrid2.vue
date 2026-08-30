@@ -1,85 +1,92 @@
-<script setup>
-import RiveAnimation from '@components/shared/RiveAnimation.vue'
-import flexiblePluginAnimation from '@assets/vite/animations/640_x_300_flexible_plugin.riv'
+<script setup lang="ts">
+interface Feature {
+  title: string
+  tagline: string
+  desc: string
+  highlights: string[]
+  bgImage?: string
+}
+
+const features: Feature[] = [
+  {
+    title: 'yishe-shop 独立站矩阵',
+    tagline: 'Scale',
+    desc: '一套架构驱动 9 大垂直品类出海独立站，SSR 秒级首屏、极致 SEO，让品牌直达全球消费者。',
+    highlights: ['9 大垂直品类', 'SSR 极速加载', '全球 CDN'],
+  },
+  {
+    title: 'yishe-client 桌面终端',
+    tagline: 'Power',
+    desc: 'Electron + 原生硬件加速，断网也能离线 AI 推理，批量视频渲染、图片合成一气呵成。',
+    highlights: ['离线 AI 推理', '批量视频渲染', 'Windows / macOS'],
+    bgImage: '/yishe-bg-1.jpg',
+  },
+  {
+    title: 'yishe-extensions 扩展系统',
+    tagline: 'Connect',
+    desc: '打通 Photoshop 工业级设计链路 + 浏览器生态扩展，爆款采集、智能打样无缝衔接。',
+    highlights: ['PS 图层解析', '爆款灵感采集', 'Chrome / Edge'],
+  },
+  {
+    title: '端云协同 · MCP 协议',
+    tagline: 'Unify',
+    desc: '全面支持 Model Context Protocol，本地 Transformers.js 离线推理与云端工具链统一调度。',
+    highlights: ['MCP 协议', '断网可用', '工具链调度'],
+    bgImage: '/yishe-bg-2.jpg',
+  },
+]
 </script>
 
 <template>
-  <section
-    class="wrapper wrapper--ticks border-t grid lg:grid-cols-2 divide-x divide-y divide-nickel"
-  >
-    <div class="p-5 sm:p-10 flex flex-col gap-3">
-      <h5 class="text-balance sm:text-pretty text-white">
-        yishe-nuxt · 9 大垂直品类独立站矩阵
-      </h5>
-      <p class="sm:max-w-[28rem] text-pretty">
-        一套自研现代化架构强力驱动服装、马克杯、装饰画、厨具、钥匙扣、鼠标垫等 9 大出海垂直品牌独立站，极致 SEO 与秒级首屏加载，赋能全球品牌出海。
-      </p>
-      <RiveAnimation
-        :desktop-src="flexiblePluginAnimation"
-        :desktop-width="640"
-        :desktop-height="300"
-        canvas-class="w-[calc(100%_+_2.5rem)] mt-5 -mx-5"
-      />
-    </div>
+  <section class="wrapper wrapper--ticks border-t">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-stroke dark:divide-nickel">
+      <div
+        v-for="(feature, index) in features"
+        :key="index"
+        class="feature-card-glow group relative p-6 sm:p-8 lg:p-10 flex flex-col gap-5 overflow-hidden min-h-[280px]"
+      >
+        <!-- 背景图卡片 -->
+        <div
+          v-if="feature.bgImage"
+          class="absolute inset-0 bg-cover bg-center opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-700 pointer-events-none"
+          :style="{ backgroundImage: `url(${feature.bgImage})` }"
+        />
 
-    <div class="flex flex-col gap-3 border-r-0 justify-between">
-      <div class="p-5 sm:p-10 flex flex-col gap-3">
-        <h5 class="text-white">yishe-client · 跨平台桌面生产力终端</h5>
-        <p class="max-w-[26rem] text-pretty">
-          基于 Electron 与底层原生硬件加速构建的桌面神器，内置浏览器自动化矩阵、批量图片多线程合成与超清营销视频秒级渲染。
+        <!-- 悬浮渐变 -->
+        <div class="absolute inset-0 bg-gradient-to-b from-white/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+        <!-- 角落装饰光点 -->
+        <div class="absolute -top-10 -right-10 w-32 h-32 rounded-full opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-700 pointer-events-none"
+          style="background: #6900ff"
+        />
+
+        <!-- Tagline -->
+        <div class="relative">
+          <span class="text-[10px] font-mono text-[#6900ff]/70 tracking-[0.15em] uppercase border border-[#6900ff]/20 px-2 py-0.5 rounded">
+            {{ feature.tagline }}
+          </span>
+        </div>
+
+        <!-- 标题 -->
+        <h5 class="relative text-white text-lg leading-snug">
+          {{ feature.title }}
+        </h5>
+
+        <!-- 描述 -->
+        <p class="relative text-white/55 text-sm leading-relaxed">
+          {{ feature.desc }}
         </p>
-      </div>
-      <div class="relative p-5 sm:p-10 flex justify-center bg-[#370a7f]">
-        <img
-          class="absolute inset-0 h-full w-full object-cover"
-          src="@assets/vite/vite-featurepanel-4-background.jpg"
-          alt=""
-          inert
-          loading="lazy"
-        />
-        <img
-          class="z-1"
-          src="@assets/vite/vite-typed-api.svg"
-          width="454"
-          height="252"
-          inert
-          loading="lazy"
-          alt="typed api"
-        />
-      </div>
-    </div>
 
-    <div class="p-5 sm:p-10 flex flex-col gap-3 lg:border-b-0">
-      <h5 class="text-white">yishe-extensions · PS 工业插件与浏览器套件</h5>
-      <p class="sm:max-w-[28rem] text-pretty mb-12 sm:mb-16">
-        无缝打通 Adobe Photoshop 专业工业级设计链路，配合多浏览器生态扩展，实现一键全网爆款灵感采集、智能图层解析与多平台自动化快速打样。
-      </p>
-      <img
-        src="@assets/vite/vite-ssr-support.png"
-        width="1008"
-        height="466"
-        alt="SSR Support"
-        loading="lazy"
-        class="w-full px-5"
-      />
-    </div>
-
-    <div class="flex flex-col gap-3 justify-between">
-      <div class="p-5 sm:p-10 flex flex-col gap-3">
-        <h5 class="text-white">端云协同 · 离线 AI 推理与 MCP 协议</h5>
-        <p class="max-w-[25rem] text-pretty">
-          全面支持 Model Context Protocol 协议与本地 Transformers.js 模型离线推理，断网环境下依然稳定实现高清抠图、矢量重构与工具链无缝调度。
-        </p>
-      </div>
-      <div class="px-5 sm:px-10 flex justify-center">
-        <img
-          src="@assets/vite/vite-ci.svg"
-          width="476"
-          height="272"
-          inert
-          loading="lazy"
-          alt="continuous ecosystem integration"
-        />
+        <!-- 亮点标签 -->
+        <div class="relative flex flex-wrap gap-1.5 pt-2 mt-auto">
+          <span
+            v-for="h in feature.highlights"
+            :key="h"
+            class="text-[10px] font-medium px-2 py-0.5 rounded-md bg-white/[0.04] border border-white/[0.08] text-white/60"
+          >
+            {{ h }}
+          </span>
+        </div>
       </div>
     </div>
   </section>

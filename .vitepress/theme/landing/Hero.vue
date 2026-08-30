@@ -13,61 +13,72 @@ if (typeof document !== 'undefined') {
   document.head.appendChild(preloadLink)
 }
 
-const installTabs = [
-  { label: '衣设设计工具', code: 'http://tool.1s.design · 毫秒级极速 AI 画布与多模态智能排版引擎', prefix: '' },
-  { label: '衣设定制商城', code: 'https://1s.design · 9 大垂直品类高性能出海独立站集群', prefix: '' },
-  { label: '衣设管理后台', code: 'http://admin.1s.design · 全渠道多租户 SaaS 柔性供应链中台', prefix: '' },
-  { label: '衣设后端服务', code: 'http://api.1s.design · 分布式 AI 渲染与 Agent 算力中枢', prefix: '' },
-  { label: '衣设桌面客户端', code: 'Windows / macOS · 跨平台桌面生产力终端与端侧离线推理', prefix: '' },
-  { label: '衣设扩展系统', code: 'Chrome Extension · 工业级插件与电商采集打样套件', prefix: '' },
+const ecosystemNodes = [
+  { label: '创意画布', code: 'tool.1s.design — 150+ AI 工具 · 毫秒级响应 · 300DPI 印刷级输出' },
+  { label: '智造商城', code: '1s.design — 9 大垂直品类 · 全球 POD 独立站矩阵' },
+  { label: '运营中台', code: 'admin.1s.design — 17+ 平台一键铺货 · 智能工单调度' },
+  { label: '算力中枢', code: 'api.1s.design — 分布式 GPU 集群 · 100+ 节点工作流' },
+  { label: '桌面终端', code: 'yishe-client — 离线 AI 推理 · 批量视频渲染' },
+  { label: '采集扩展', code: 'yishe-extensions — PS 插件 · 爆款采集 · 智能打样' },
 ]
 </script>
 
 <template>
   <div
-    class="wrapper wrapper--ticks grid md:grid-cols-2 w-full border-nickel md:divide-x"
+    class="wrapper wrapper--ticks grid md:grid-cols-2 w-full border-nickel md:divide-x relative overflow-hidden"
   >
+    <!-- 背景彩色光晕 -->
+    <div class="hero-glow hero-glow-1 animate-pulse-glow" />
+    <div class="hero-glow hero-glow-2 animate-pulse-glow" style="animation-delay: -2s" />
+
     <div
-      class="flex flex-col p-10 justify-between gap-20 items-center md:items-start"
+      class="flex flex-col p-10 justify-between gap-16 items-center md:items-start relative z-10"
     >
       <div
-        class="flex flex-col gap-5 items-center md:items-start text-center md:text-left"
+        class="flex flex-col gap-6 items-center md:items-start text-center md:text-left"
       >
-        <h1 class="text-white text-pretty max-w-[25rem]">
-          衣设 <span class="text-[var(--color-brand)]">1s.design</span>
+        <h1 class="text-white text-pretty max-w-[28rem]">
+          衣设<span class="text-[#6900ff]"> · 下一代 AI 创意设计生态</span>
         </h1>
-        <p class="text-white/70 md:text-lg max-w-[27rem] text-pretty">
-          下一代 AI 驱动的 POD 创意设计生态 <br /> 重新定义全球柔性智造全链路
+
+        <p class="text-white/70 md:text-lg max-w-[30rem] text-pretty leading-relaxed">
+          从一串灵感到一件成衣，从一张草图到全球上架。衣设打通<span class="text-white font-medium">创意设计、智能软件、自动化智造</span>全链路，让每一个创意都能秒级变为现实。
         </p>
-        <p class="text-white/50 text-sm max-w-[27rem] text-pretty">
-          艺术来源于生活，又回归生活 · 创意即产品，设计即所得
+
+        <p class="text-white/40 text-sm max-w-[28rem] text-pretty font-mono">
+          Create at the speed of thought. Manufacture at the scale of AI.
         </p>
-        <div class="flex items-center gap-4 mt-8 flex-wrap">
+
+        <div class="flex items-center gap-4 mt-4 flex-wrap">
           <a
             href="http://tool.1s.design"
             target="_blank"
             rel="noopener noreferrer"
-            class="button button--primary inline-block w-fit"
+            class="btn-image-bg inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium transition-all hover:scale-105"
           >
-            进入设计工具 (tool.1s.design)
+            开启创作 →
           </a>
           <a
             href="https://1s.design"
             target="_blank"
             rel="noopener noreferrer"
-            class="button inline-block w-fit"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white/80 font-medium border border-white/15 hover:border-white/30 hover:text-white transition-all"
           >
-            访问定制商城 (1s.design)
+            浏览商城
           </a>
         </div>
       </div>
+
       <CodeGroup
-        :tabs="installTabs"
-        class="hidden md:block w-full -mb-[16px]"
+        :tabs="ecosystemNodes"
+        class="hidden md:block w-full -mb-[16px] relative z-10"
         style="
-          --vp-code-tab-bg: var(--color-slate);
-          --vp-code-block-bg: var(--color-slate);
-          --vp-code-tab-divider: #000;
+          --vp-code-tab-bg: rgba(105, 0, 255, 0.08);
+          --vp-code-block-bg: rgba(0, 0, 0, 0.3);
+          --vp-code-tab-divider: rgba(105, 0, 255, 0.2);
+          border: 1px solid rgba(105, 0, 255, 0.15);
+          border-radius: 12px;
+          backdrop-filter: blur(8px);
         "
       />
     </div>

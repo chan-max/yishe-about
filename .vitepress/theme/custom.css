@@ -1,11 +1,42 @@
+/* ========== 基础覆盖 ========== */
 .home-hero .image {
   width: 200px;
   height: 200px;
 }
 
-.nav-bar .logo {
-  height: 30px;
-  margin-right: 2px;
+/* 隐藏主题默认 logo 图片 */
+header a[href="/"] > img.h-4 {
+  display: none !important;
+}
+
+/* 隐藏搜索功能 */
+.VPNavBarSearch,
+.search-button,
+.DocSearch-Button,
+[aria-label="搜索"],
+[aria-label="搜索生态"] {
+  display: none !important;
+}
+
+/* 导航菜单文字缩小 */
+.nav-bar a,
+.nav-bar span,
+.VPNavBarMenu a,
+.VPNavBarMenu span,
+.VPNavBarDropdown a,
+.VPNavBarDropdown span {
+  font-size: 13px !important;
+}
+
+/* 顶部导航栏整体紧凑一些 */
+.VPNavBar {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+.VPNavBarMenu .VPNavBarMenuLink {
+  font-size: 13px !important;
+  padding: 0 0.5rem !important;
 }
 
 .content img {
@@ -17,8 +48,8 @@
 }
 
 :root {
-  --c-brand: #646cff;
-  --c-brand-light: #747bff;
+  --c-brand: #6900ff;
+  --c-brand-light: #8b3fff;
 }
 
 .custom-block.tip {
@@ -39,7 +70,6 @@
   opacity: 0.8;
 }
 
-/* docs-cn specific */
 .cn-footnote {
   margin-top: 20px;
 }
@@ -82,4 +112,274 @@
     right: 10px;
     margin: 0;
   }
+}
+
+/* ========== 衣设品牌色 ========== */
+:root {
+  --yishe-brand: #6900ff;
+  --yishe-brand-light: #8b3fff;
+  --yishe-brand-glow: rgba(105, 0, 255, 0.15);
+}
+
+/* ========== 渐变文字 ========== */
+.gradient-text {
+  background: linear-gradient(135deg, #6900ff 0%, #a855f7 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========== 图片背景按钮 ========== */
+.btn-image-bg {
+  position: relative;
+  overflow: hidden;
+  background: #6900ff;
+  border: none;
+}
+
+.btn-image-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/yishe-bg-1.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+  transition: opacity 0.3s;
+}
+
+.btn-image-bg:hover::before {
+  opacity: 0.55;
+}
+
+.btn-image-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Footer CTA 按钮 */
+footer .button--white {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+footer .button--white::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/yishe-bg-2.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.25;
+  mix-blend-mode: overlay;
+  transition: opacity 0.3s;
+}
+
+footer .button--white:hover::before {
+  opacity: 0.4;
+}
+
+footer .button--white::after {
+  display: none !important;
+}
+
+/* ========== 渐变分割线 ========== */
+.gradient-divider {
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(105, 0, 255, 0.2) 30%,
+    rgba(105, 0, 255, 0.3) 50%,
+    rgba(105, 0, 255, 0.2) 70%,
+    transparent 100%
+  );
+}
+
+/* ========== Hero 背景光晕 ========== */
+.hero-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-glow-1 {
+  top: -150px;
+  left: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(105, 0, 255, 0.2) 0%, transparent 70%);
+}
+
+.hero-glow-2 {
+  bottom: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(139, 63, 255, 0.15) 0%, transparent 70%);
+}
+
+/* ========== 呼吸动画 ========== */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 5s ease-in-out infinite;
+}
+
+/* ========== 特性卡片 ========== */
+.feature-card-glow {
+  position: relative;
+}
+
+.feature-card-glow::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(105, 0, 255, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.feature-card-glow:hover::after {
+  opacity: 1;
+}
+
+/* ========== 背景图装饰区域 ========== */
+.bg-decoration {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-decoration::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/yishe-bg-1.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-decoration > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== 全宽图片背景区 ========== */
+.bg-image-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-image-section .bg-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-image-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== 浮动动画 ========== */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(5px, -5px) rotate(1deg); }
+  50% { transform: translate(0, -10px) rotate(0deg); }
+  75% { transform: translate(-5px, -5px) rotate(-1deg); }
+}
+
+.animate-float {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-drift {
+  animation: drift 8s ease-in-out infinite;
+}
+
+/* ========== 装饰性光球 ========== */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-orb-1 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(105, 0, 255, 0.15) 0%, transparent 70%);
+  top: 10%;
+  left: -50px;
+  animation: drift 10s ease-in-out infinite;
+}
+
+.glow-orb-2 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(139, 63, 255, 0.12) 0%, transparent 70%);
+  bottom: 20%;
+  right: -30px;
+  animation: drift 12s ease-in-out infinite reverse;
+}
+
+.glow-orb-3 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+/* ========== 技术栈图标颜色 ========== */
+.tech-icon-wrap {
+  background: rgba(105, 0, 255, 0.1);
+  border-color: rgba(105, 0, 255, 0.2);
+}
+
+.tech-icon-wrap:hover {
+  background: rgba(105, 0, 255, 0.15);
+  border-color: rgba(105, 0, 255, 0.35);
+  box-shadow: 0 0 20px rgba(105, 0, 255, 0.1);
+}
+
+/* ========== 数字统计渐变 ========== */
+.stat-number {
+  background: linear-gradient(135deg, #6900ff 0%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========== 卡片悬浮光晕 ========== */
+.card-glow:hover {
+  box-shadow: 0 0 30px rgba(105, 0, 255, 0.08);
 }

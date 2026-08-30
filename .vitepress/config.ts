@@ -69,7 +69,7 @@ const config = defineConfig({
     variant: 'vite',
     banner: {
       id: 'yishe-v2-release',
-      text: '衣设 2.0 全生态矩阵发布：开启 AI 驱动的 POD 柔性智造新纪元',
+      text: '衣设 2.0 正式发布 — 六大核心子系统 · 全链路 AI 创意设计生态',
       url: 'https://1s.design',
     },
 
@@ -115,25 +115,23 @@ const config = defineConfig({
     },
 
     footer: {
-      copyright: `© 2026 衣设 1s.design. All rights reserved. 艺术来源于生活，又回归生活。`,
+      copyright: `© 2026 衣设 1s.design. All rights reserved.`,
       nav: [
         {
           title: '衣设生态矩阵',
           items: [
-            { text: '衣设设计工具', link: 'http://tool.1s.design' },
+            { text: 'yishe-tool 创意画布', link: 'http://tool.1s.design' },
             { text: '衣设定制商城', link: 'https://1s.design' },
-            { text: '衣设管理后台系统', link: 'http://admin.1s.design' },
-            { text: '衣设后端服务', link: 'http://api.1s.design' },
+            { text: 'yishe-admin 运营中台', link: 'http://admin.1s.design' },
+            { text: 'yishe-server 算力中枢', link: 'http://api.1s.design' },
             { text: '衣设品牌官网', link: 'http://about.1s.design' },
           ],
         },
         {
           title: '资源与下载',
           items: [
-            { text: '客户端下载 (Windows/macOS)', link: 'https://gh-proxy.org/https://github.com/1s-design/yishe-client/releases/latest/download/yishe-client.exe' },
-            { text: 'Chrome 扩展插件下载', link: 'https://gh-proxy.org/https://github.com/1s-design/yishe-extensions/releases/latest/download/yishe-extensions.zip' },
-            { text: '生态指引', link: '/guide/' },
-            { text: '设计理念', link: '/guide/philosophy' },
+            { text: '桌面客户端下载', link: 'https://gh-proxy.org/https://github.com/1s-design/yishe-client/releases/latest/download/yishe-client.exe' },
+            { text: 'Chrome 扩展下载', link: 'https://gh-proxy.org/https://github.com/1s-design/yishe-extensions/releases/latest/download/yishe-extensions.zip' },
           ],
         },
         {
@@ -150,20 +148,16 @@ const config = defineConfig({
     },
 
     nav: [
-      { text: '生态指引', link: '/guide/', activeMatch: '/guide/' },
-      { text: '配置体系', link: '/config/', activeMatch: '/config/' },
-      { text: '智能插件', link: '/plugins/', activeMatch: '/plugins/' },
       {
         text: '生态矩阵',
         items: [
-          { text: '衣设设计工具 (tool.1s.design)', link: 'http://tool.1s.design' },
-          { text: '衣设定制商城 (1s.design)', link: 'https://1s.design' },
-          { text: '衣设管理后台系统 (admin.1s.design)', link: 'http://admin.1s.design' },
-          { text: '衣设后端服务 (api.1s.design)', link: 'http://api.1s.design' },
-          { text: '衣设品牌官网 (about.1s.design)', link: 'http://about.1s.design' },
+          { text: 'yishe-tool (tool.1s.design)', link: 'http://tool.1s.design' },
+          { text: '衣设商城 (1s.design)', link: 'https://1s.design' },
+          { text: 'yishe-admin (admin.1s.design)', link: 'http://admin.1s.design' },
+          { text: 'yishe-server (api.1s.design)', link: 'http://api.1s.design' },
         ]
       },
-      { text: '立即体验设计工具', link: 'http://tool.1s.design' }
+      { text: '立即体验', link: 'http://tool.1s.design' }
     ],
 
     sidebar: {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import background from '@voidzero-dev/vitepress-theme/src/assets/vite/footer-background.jpg'
+const background = '/yishe-bg-1.jpg'
 import event1 from '../../../images/events/viteconf_2022.jpg'
 import event2 from '../../../images/events/viteconf_2023.jpg'
 import event3 from '../../../images/events/viteconf_2024.jpg'

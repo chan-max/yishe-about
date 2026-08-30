@@ -74,12 +74,6 @@ function dismiss() {
 
       <div class="relative z-10 w-full h-10 flex px-4">
         <div class="flex items-center gap-2 w-full max-w-360 mx-auto px-4">
-          <img
-            :src="monoIcon"
-            :alt="`${logoAlt} 图标`"
-            class="size-5 shrink-0 hidden sm:block drop-shadow-md/70"
-          />
-
           <span
             class="text-xs translate-y-px font-medium font-mono leading-snug tracking-wide uppercase whitespace-nowrap overflow-hidden text-ellipsis text-shadow-md/50"
           >
