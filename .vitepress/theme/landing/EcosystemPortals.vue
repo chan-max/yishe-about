@@ -48,7 +48,7 @@ const onlinePortals: OnlinePortal[] = [
   {
     title: 'yishe-admin 运营中台',
     subtitle: 'admin.1s.design',
-    url: 'https://admin.1s.design',
+    url: 'http://admin.1s.design',
     tag: 'SaaS 中台',
     icon: 'ph:chart-polar-bold',
     desc: '全渠道多租户柔性供应链中台，商品管理、工单调度、素材资产与全网渠道分发一体化。',
