@@ -41,7 +41,7 @@ const ecosystemNodes = [
 
         <div class="flex items-center gap-4 mt-4 flex-wrap">
           <a
-            href="http://admin.1s.design"
+            href="https://admin.1s.design"
             target="_blank"
             rel="noopener noreferrer"
             class="btn-image-bg inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium transition-all hover:scale-105"
