@@ -1,17 +1,6 @@
 <script setup>
-import RiveAnimation from '@components/shared/RiveAnimation.vue'
 import CodeGroup from '@components/shared/CodeGroup.vue'
-
-import viteAnimation from '@assets/vite/animations/641_x_629_vite_masthead.riv'
-
-if (typeof document !== 'undefined') {
-  const preloadLink = document.createElement('link')
-  preloadLink.rel = 'preload'
-  preloadLink.href = viteAnimation
-  preloadLink.as = 'fetch'
-  preloadLink.crossOrigin = 'anonymous'
-  document.head.appendChild(preloadLink)
-}
+import HeroCanvas from './HeroCanvas.vue'
 
 const ecosystemNodes = [
   { label: '创意画布', code: 'tool.1s.design — 150+ AI 工具 · 毫秒级响应 · 300DPI 印刷级输出' },
@@ -25,12 +14,13 @@ const ecosystemNodes = [
 
 <template>
   <div
-    class="wrapper wrapper--ticks grid md:grid-cols-2 w-full border-nickel md:divide-x relative overflow-hidden"
+    class="wrapper wrapper--ticks grid md:grid-cols-2 w-full border-nickel md:divide-x relative overflow-hidden bg-[#0a0a0a]"
   >
     <!-- 背景彩色光晕 -->
     <div class="hero-glow hero-glow-1 animate-pulse-glow" />
     <div class="hero-glow hero-glow-2 animate-pulse-glow" style="animation-delay: -2s" />
 
+    <!-- 左侧：文案内容 -->
     <div
       class="flex flex-col p-10 justify-between gap-16 items-center md:items-start relative z-10"
     >
@@ -42,7 +32,7 @@ const ecosystemNodes = [
         </h1>
 
         <p class="text-white/70 md:text-lg max-w-[30rem] text-pretty leading-relaxed">
-          从一串灵感到一件成衣，从一张草图到全球上架。衣设打通<span class="text-white font-medium">创意设计、智能软件、自动化智造</span>全链路，让每一个创意都能秒级变为现实。
+          从一串灵感到一件印花商品，从一张草图到全域推广。衣设打通<span class="text-white font-medium">创意设计、智能软件、自动化智造</span>全链路，让每一个创意都能秒级变为现实。
         </p>
 
         <p class="text-white/40 text-sm max-w-[28rem] text-pretty font-mono">
@@ -51,7 +41,7 @@ const ecosystemNodes = [
 
         <div class="flex items-center gap-4 mt-4 flex-wrap">
           <a
-            href="http://tool.1s.design"
+            href="http://admin.1s.design"
             target="_blank"
             rel="noopener noreferrer"
             class="btn-image-bg inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium transition-all hover:scale-105"
@@ -78,24 +68,14 @@ const ecosystemNodes = [
           --vp-code-tab-divider: rgba(105, 0, 255, 0.2);
           border: 1px solid rgba(105, 0, 255, 0.15);
           border-radius: 12px;
-          backdrop-filter: blur(8px);
+          background: rgba(10, 10, 10, 0.6);
         "
       />
     </div>
-    <div class="flex flex-col sm:min-h-[30rem]">
-      <div
-        class="relative px-10 pb-10 md:pt-10 h-full flex flex-col justify-center overflow-clip"
-      >
-        <RiveAnimation
-          :desktop-src="viteAnimation"
-          :mobile-src="viteAnimation"
-          :desktop-width="641"
-          :desktop-height="629"
-          :mobile-width="641"
-          :mobile-height="629"
-          canvas-class="w-full"
-        />
-      </div>
+
+    <!-- 右侧：炫酷效果 -->
+    <div class="flex flex-col relative">
+      <HeroCanvas />
     </div>
   </div>
 </template>

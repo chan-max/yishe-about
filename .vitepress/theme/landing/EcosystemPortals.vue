@@ -37,7 +37,7 @@ const onlinePortals: OnlinePortal[] = [
     badge: '极速创作',
   },
   {
-    title: '衣设定制商城',
+    title: 'yishe-shop',
     subtitle: '1s.design',
     url: 'https://1s.design',
     tag: 'POD 独立站',
@@ -120,10 +120,10 @@ const downloadItems: DownloadItem[] = [
           <span>六大核心子系统 · 全生态矩阵</span>
         </div>
         <h2 class="text-white text-2xl sm:text-3xl font-bold tracking-tight">
-          从创意到智造，一个生态全搞定
+          从创意源点到设计产品
         </h2>
         <p class="text-white/55 text-sm sm:text-base max-w-2xl leading-relaxed">
-          在线设计、独立站商城、供应链中台、桌面终端与浏览器扩展 —— 环环相扣，无缝协同
+          在线设计、智能运营、端云协同与柔性制造，构成完整的设计产品基础设施
         </p>
       </div>
       <div class="text-[10px] font-mono text-white/30 tracking-wider">

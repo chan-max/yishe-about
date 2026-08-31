@@ -68,9 +68,9 @@ const config = defineConfig({
     darkModeSwitchTitle: '切换到深色模式',
     variant: 'vite',
     banner: {
-      id: 'yishe-v2-release',
-      text: '衣设 2.0 正式发布 — 六大核心子系统 · 全链路 AI 创意设计生态',
-      url: 'https://1s.design',
+      id: 'yishe-admin-register',
+      text: '衣设 SaaS 软件平台现已开放注册 — 全渠道电商运营，一站式智能制造',
+      url: 'http://admin.1s.design',
     },
 
     editLink: {
@@ -121,7 +121,7 @@ const config = defineConfig({
           title: '衣设生态矩阵',
           items: [
             { text: 'yishe-tool 创意画布', link: 'http://tool.1s.design' },
-            { text: '衣设定制商城', link: 'https://1s.design' },
+            { text: 'yishe-shop', link: 'https://1s.design' },
             { text: 'yishe-admin 运营中台', link: 'http://admin.1s.design' },
             { text: 'yishe-server 算力中枢', link: 'http://api.1s.design' },
             { text: '衣设品牌官网', link: 'http://about.1s.design' },
@@ -152,12 +152,12 @@ const config = defineConfig({
         text: '生态矩阵',
         items: [
           { text: 'yishe-tool (tool.1s.design)', link: 'http://tool.1s.design' },
-          { text: '衣设商城 (1s.design)', link: 'https://1s.design' },
+          { text: 'yishe-shop (1s.design)', link: 'https://1s.design' },
           { text: 'yishe-admin (admin.1s.design)', link: 'http://admin.1s.design' },
           { text: 'yishe-server (api.1s.design)', link: 'http://api.1s.design' },
         ]
       },
-      { text: '立即体验', link: 'http://tool.1s.design' }
+      { text: '立即体验', link: 'http://admin.1s.design' }
     ],
 
     sidebar: {

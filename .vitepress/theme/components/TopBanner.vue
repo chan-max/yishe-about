@@ -73,15 +73,18 @@ function dismiss() {
       <div class="banner-shine absolute inset-0" aria-hidden="true" />
 
       <div class="relative z-10 w-full h-10 flex px-4">
-        <div class="flex items-center gap-2 w-full max-w-360 mx-auto px-4">
+        <div class="flex items-center gap-3 w-full max-w-360 mx-auto px-4">
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/20 backdrop-blur-sm border border-white/20 uppercase tracking-wider">
+            SaaS
+          </span>
           <span
-            class="text-xs translate-y-px font-medium font-mono leading-snug tracking-wide uppercase whitespace-nowrap overflow-hidden text-ellipsis text-shadow-md/50"
+            class="text-xs translate-y-px font-medium leading-snug whitespace-nowrap overflow-hidden text-ellipsis text-shadow-md/50"
           >
             {{ bannerText }}
           </span>
 
           <span
-            class="size-5 shrink-0 flex items-center justify-center rounded-sm bg-[#08060D] ring-1 ring-white/15 transition-transform duration-200 group-hover:translate-x-1"
+            class="size-5 shrink-0 flex items-center justify-center rounded-sm bg-white/20 backdrop-blur-sm ring-1 ring-white/20 transition-transform duration-200 group-hover:translate-x-1"
           >
             <Icon icon="lucide:arrow-right" class="size-3" aria-hidden="true" />
           </span>
