@@ -2,283 +2,72 @@
 import { ref, onMounted, onUnmounted } from "vue";
 
 /*
- * 衣设 1s.design — 从灵感源点到设计产品的创意基础设施
+ * 衣设 1s.design - 从免费创作到个性化 POD 社区
  *
- * 这张图不是单纯的技术拓扑：第一行是用户看得见的创作入口，第二行是
- * design-server 提供 AI / 工作流基础设施，下面连接用户体验、商业运营
- * 与柔性制造，最终汇聚为“设计产品”。节点名称对应真实仓库，
- * 让产品叙事与 SaaS 架构保持一致。
+ * 从左到右表达产品思想：需求进入 → 免费创作 → 智能编排 → 商品化 →
+ * 社区与全球履约。节点名称对应真实产品能力，既讲清架构，也讲清价值闭环。
  */
-const WORKFLOW_BRAND = "#6900ff";
-const WORKFLOW_HUE = 265; // #6900ff 的 HSL 色相
-
-const nodes = [
-  // 第一层：一个出发点。
-  {
-    id: "idea",
-    x: 0.5,
-    y: 0.08,
-    size: 35,
-    title: "灵感源点",
-    subtitle: "ORIGIN",
-    type: "idea",
-    shape: "circle",
-    level: "root",
-    hue: WORKFLOW_HUE,
-  },
-
-  // 第二层：灵感被拆成创作路径。
-  {
-    id: "canvas",
-    x: 0.37,
-    y: 0.22,
-    size: 31,
-    title: "意念构形",
-    subtitle: "CANVAS",
-    type: "design",
-    shape: "circle",
-    parent: "idea",
-    ring: true,
-    hue: 260,
-  },
-  {
-    id: "ai",
-    x: 0.63,
-    y: 0.22,
-    size: 33,
-    title: "智能创制",
-    subtitle: "INTELLIGENCE",
-    type: "ai",
-    shape: "circle",
-    parent: "idea",
-    ring: true,
-    hue: 300,
-  },
-
-  // 第三层：设计能力沉淀为素材、算力与可编排的工作流。
-  {
-    id: "library",
-    x: 0.17,
-    y: 0.38,
-    size: 28,
-    title: "视觉资产",
-    subtitle: "200K+ ASSETS",
-    type: "library",
-    shape: "square",
-    parent: "ai",
-    hue: 326,
-  },
-  {
-    id: "compute",
-    x: 0.39,
-    y: 0.38,
-    size: 28,
-    title: "计算基座",
-    subtitle: "AI COMPUTE",
-    type: "compute",
-    shape: "square",
-    parent: "ai",
-    hue: 212,
-  },
-  {
-    id: "vector",
-    x: 0.61,
-    y: 0.38,
-    size: 28,
-    title: "语义索引",
-    subtitle: "QDRANT",
-    type: "vector",
-    shape: "square",
-    parent: "ai",
-    hue: 195,
-  },
-  {
-    id: "workflow",
-    x: 0.83,
-    y: 0.38,
-    size: 35,
-    title: "智能编排",
-    subtitle: "100+ NODES",
-    type: "workflow",
-    shape: "circle",
-    parent: "ai",
-    ring: true,
-    hue: WORKFLOW_HUE,
-  },
-
-  // 第四层：design-server 通过 API 把能力交给各个产品端。
-  {
-    id: "gateway",
-    x: 0.1,
-    y: 0.55,
-    size: 33,
-    title: "能力中枢",
-    subtitle: "design-server · CORE API",
-    type: "gateway",
-    shape: "circle",
-    parent: "workflow",
-    ring: true,
-    hue: 248,
-  },
-  {
-    id: "nuxt",
-    x: 0.3,
-    y: 0.55,
-    size: 28,
-    title: "体验前台",
-    subtitle: "yishe-nuxt · EXPERIENCE",
-    type: "nuxt",
-    shape: "square",
-    parent: "gateway",
-    hue: 168,
-  },
-  {
-    id: "admin",
-    x: 0.5,
-    y: 0.55,
-    size: 33,
-    title: "商业中枢",
-    subtitle: "yishe-admin · COMMERCE OS",
-    type: "platform",
-    shape: "circle",
-    parent: "gateway",
-    ring: true,
-    hue: 278,
-  },
-  {
-    id: "client",
-    x: 0.7,
-    y: 0.55,
-    size: 29,
-    title: "创作终端",
-    subtitle: "yishe-client · RUNTIME",
-    type: "desktop",
-    shape: "square",
-    parent: "gateway",
-    hue: 185,
-  },
-  {
-    id: "extensions",
-    x: 0.9,
-    y: 0.55,
-    size: 28,
-    title: "生态扩展",
-    subtitle: "yishe-extensions · ECOSYSTEM",
-    type: "extensions",
-    shape: "square",
-    parent: "client",
-    hue: 145,
-  },
-
-  // 第五层：产品、渠道和数据形成可增长的商业闭环。
-  {
-    id: "analytics",
-    x: 0.1,
-    y: 0.73,
-    size: 28,
-    title: "增长洞察",
-    subtitle: "INSIGHTS",
-    type: "analytics",
-    shape: "square",
-    parent: "admin",
-    hue: 42,
-  },
-  {
-    id: "shop",
-    x: 0.3,
-    y: 0.73,
-    size: 29,
-    title: "品牌矩阵",
-    subtitle: "SITE MATRIX",
-    type: "store",
-    shape: "circle",
-    parent: "nuxt",
-    hue: 320,
-  },
-  {
-    id: "platforms",
-    x: 0.5,
-    y: 0.73,
-    size: 29,
-    title: "渠道网络",
-    subtitle: "17+ CHANNELS",
-    type: "platforms",
-    shape: "square",
-    parent: "admin",
-    hue: 340,
-  },
-  {
-    id: "product",
-    x: 0.7,
-    y: 0.73,
-    size: 32,
-    title: "产品成形",
-    subtitle: "POD PRODUCT",
-    type: "product",
-    shape: "circle",
-    parent: "shop",
-    hue: 132,
-  },
-  {
-    id: "supply",
-    x: 0.9,
-    y: 0.73,
-    size: 31,
-    title: "柔性制造",
-    subtitle: "SUPPLY NETWORK",
-    type: "supply",
-    shape: "square",
-    parent: "product",
-    hue: 104,
-  },
-
-  // 第六层：所有业务最终汇聚到目标。
-  {
-    id: "goal",
-    x: 0.5,
-    y: 0.92,
-    size: 36,
-    title: "设计产品",
-    subtitle: "GOOD DESIGN, REALIZED",
-    type: "goal",
-    shape: "circle",
-    parent: "supply",
-    level: "goal",
-    ring: true,
-    hue: WORKFLOW_HUE,
-  },
+const WORKFLOW_BRAND = '#6900ff';
+const WORKFLOW_HUE = 265;
+const NEUTRAL_HUE = 220;
+const ACCENT_NODES = new Set(['inspiration', 'free', 'middle', 'work', 'pod']);
+const stages = [
+  { x: 0.08, label: '创意灵感' },
+  { x: 0.23, label: '免费创作' },
+  { x: 0.40, label: '智能中台' },
+  { x: 0.62, label: '作品 / POD' },
+  { x: 0.76, label: '渠道发布' },
+  { x: 0.90, label: '独立站 / 交付' },
 ];
 
-// 实线表示父子主链路，虚线表示跨模块复用能力，全部自上而下汇聚到目标。
+/* ── 节点：用一条横向主链讲清“创意 → 作品 → 发布 → 交付”，能力节点作为树枝展开 ── */
+const nodes = [
+  // 1. 创意起点
+  { id: 'inspiration', x: 0.08, y: 0.50, size: 29, title: '创意灵感', subtitle: 'IDEA', type: 'idea', shape: 'card', level: 'root', hue: WORKFLOW_HUE },
+
+  // 2. 免费创作：降低门槛，让每个人都能开始。
+  { id: 'free', x: 0.23, y: 0.50, size: 28, title: '免费创作', subtitle: 'FREE-FIRST', type: 'free', shape: 'card', parent: 'inspiration', ring: true, hue: WORKFLOW_HUE },
+  { id: 'tool', x: 0.34, y: 0.20, size: 24, title: '设计工具', subtitle: 'yishe-tool', type: 'design', shape: 'card', parent: 'free', hue: NEUTRAL_HUE },
+  { id: 'assistant', x: 0.34, y: 0.40, size: 24, title: 'AI 助手', subtitle: 'AIGC', type: 'ai', shape: 'card', parent: 'free', hue: NEUTRAL_HUE },
+  { id: 'resources', x: 0.34, y: 0.60, size: 24, title: '免费素材', subtitle: 'ASSETS', type: 'library', shape: 'card', parent: 'free', hue: NEUTRAL_HUE },
+  { id: 'plugins', x: 0.34, y: 0.80, size: 24, title: '桌面 / 扩展', subtitle: 'CLIENT + PS', type: 'extensions', shape: 'card', parent: 'free', hue: NEUTRAL_HUE },
+
+  // 3. 智能中台：将创作能力变成可复用、可自动化的生产系统。
+  { id: 'middle', x: 0.48, y: 0.50, size: 28, title: '智能中台', subtitle: 'SYSTEM CORE', type: 'platform', shape: 'card', parent: 'free', ring: true, hue: WORKFLOW_HUE },
+  { id: 'server', x: 0.48, y: 0.18, size: 23, title: '算力中枢', subtitle: 'yishe-server', type: 'compute', shape: 'card', parent: 'middle', hue: NEUTRAL_HUE },
+  { id: 'workflow', x: 0.48, y: 0.36, size: 25, title: '工作流', subtitle: '100+ NODES', type: 'workflow', shape: 'card', parent: 'middle', hue: NEUTRAL_HUE },
+  { id: 'admin', x: 0.48, y: 0.64, size: 24, title: '运营中台', subtitle: 'yishe-admin', type: 'platform', shape: 'card', parent: 'middle', hue: NEUTRAL_HUE },
+  { id: 'proof', x: 0.48, y: 0.82, size: 23, title: '智能打样', subtitle: 'MOCKUP', type: 'desktop', shape: 'card', parent: 'middle', hue: NEUTRAL_HUE },
+
+  // 4. 作品结果
+  { id: 'work', x: 0.62, y: 0.38, size: 29, title: '优秀作品', subtitle: 'DESIGN OUTPUT', type: 'product', shape: 'card', parent: 'middle', ring: true, hue: WORKFLOW_HUE },
+
+  // 5. 多渠道发布：同一件作品可以被发布到不同场景。
+  { id: 'site', x: 0.90, y: 0.18, size: 23, title: '独立站', subtitle: '1s.design', type: 'store', shape: 'card', parent: 'work', hue: NEUTRAL_HUE },
+  { id: 'ecommerce', x: 0.76, y: 0.34, size: 23, title: '电商平台', subtitle: 'MULTI-CHANNEL', type: 'platforms', shape: 'card', parent: 'work', hue: NEUTRAL_HUE },
+  { id: 'social', x: 0.76, y: 0.58, size: 23, title: '自媒体', subtitle: 'SOCIAL MEDIA', type: 'analytics', shape: 'card', parent: 'work', hue: NEUTRAL_HUE },
+  { id: 'share', x: 0.76, y: 0.82, size: 23, title: '社区分享', subtitle: 'COMMUNITY', type: 'platform', shape: 'card', parent: 'work', hue: NEUTRAL_HUE },
+
+  // 6. POD：按需生产，连接创意与真实商品。
+  { id: 'pod', x: 0.62, y: 0.72, size: 28, title: 'POD 商品', subtitle: 'ON DEMAND', type: 'product', shape: 'card', parent: 'work', ring: true, hue: WORKFLOW_HUE },
+  { id: 'delivery', x: 0.90, y: 0.72, size: 24, title: '全球交付', subtitle: 'FULFILLMENT', type: 'deliver', shape: 'card', parent: 'pod', hue: NEUTRAL_HUE },
+];
+
+/* ── 主链 + 分支 + 少量双向通信：复杂的是关系，不是装饰 ── */
 const connections = [
   [0, 1],
-  [0, 2],
-  [1, 3],
-  [2, 3],
-  [1, 4],
-  [2, 4],
-  [1, 5],
-  [2, 5],
-  [2, 6],
-  [5, 6],
-  [6, 7],
-  [6, 8],
-  [6, 9],
-  [6, 10],
-  [6, 11],
-  [7, 8],
-  [8, 13],
-  [9, 12],
-  [9, 14],
-  [10, 11],
-  [10, 14],
-  [11, 14],
-  [12, 13],
-  [13, 15],
-  [14, 15],
-  [15, 16],
-  [15, 17],
+  [1, 2], [1, 3], [1, 4], [1, 5], [1, 6],
+  [6, 7], [6, 8], [6, 9], [6, 10], [6, 11],
+  [11, 12], [11, 13], [11, 14], [11, 15],
+  [12, 16], [13, 16], [14, 16], [15, 16],
   [16, 17],
+  // 能力之间的沟通与反馈
+  [2, 3, 'communication'], [2, 8, 'communication'],
+  [3, 7, 'communication'], [4, 8, 'communication'],
+  [5, 9, 'communication'], [8, 11, 'communication'],
+  [12, 13, 'communication'], [13, 14, 'communication'],
+  [14, 15, 'communication'], [15, 1, 'communication'],
+  [16, 11, 'communication'], [17, 15, 'communication'],
 ];
 
 const canvasRef = ref(null);
@@ -353,8 +142,7 @@ class YishePyramidCanvas {
   }
 
   initParticles() {
-    // 24 个全局粒子，每条边最多一个，避免“粒子数 × 连接数”的隐性放大。
-    this.particles = Array.from({ length: 24 }, () => ({
+    this.particles = Array.from({ length: 15 }, () => ({
       t: Math.random(),
       speed: 0.00014 + Math.random() * 0.00018,
       size: 1 + Math.random() * 1.25,
@@ -373,10 +161,15 @@ class YishePyramidCanvas {
 
   isRelated(node) {
     if (!this.hoveredId) return false;
+    const hoveredIndex = this.nodes.findIndex((item) => item.id === this.hoveredId);
+    const nodeIndex = this.nodes.findIndex((item) => item.id === node.id);
     return (
       node.id === this.hoveredId ||
-      node.parent === this.hoveredId ||
-      this.nodes.some((item) => item.id === this.hoveredId && item.parent === node.id)
+      this.connections.some(
+        ([from, to]) =>
+          (from === hoveredIndex && to === nodeIndex) ||
+          (to === hoveredIndex && from === nodeIndex),
+      )
     );
   }
 
@@ -390,71 +183,103 @@ class YishePyramidCanvas {
     gctx.fillStyle = "#090a0f";
     gctx.fillRect(0, 0, this.w, this.h);
 
-    // 网格只在尺寸变化时绘制；动画帧只负责 drawImage。
-    gctx.strokeStyle = "rgba(118, 130, 180, 0.045)";
-    gctx.lineWidth = 1;
+    // 参考工作流画布使用低对比点阵：提供对齐感，但不与节点争夺注意力。
+    gctx.fillStyle = "rgba(156, 166, 205, 0.115)";
     const gap = this.w < 560 ? 26 : 34;
-    for (let x = 0; x <= this.w; x += gap) {
-      gctx.beginPath();
-      gctx.moveTo(x, 0);
-      gctx.lineTo(x, this.h);
-      gctx.stroke();
+    for (let x = gap / 2; x < this.w; x += gap) {
+      for (let y = gap / 2; y < this.h; y += gap) {
+        gctx.beginPath();
+        gctx.arc(x, y, 1.15, 0, Math.PI * 2);
+        gctx.fill();
+      }
     }
-    for (let y = 0; y <= this.h; y += gap) {
-      gctx.beginPath();
-      gctx.moveTo(0, y);
-      gctx.lineTo(this.w, y);
-      gctx.stroke();
-    }
+
+    // 阶段标题和淡淡的分隔线，让横向阅读顺序在第一眼就成立。
+    gctx.textAlign = 'center';
+    gctx.textBaseline = 'top';
+    gctx.font = '600 8px Inter, -apple-system, sans-serif';
+    stages.forEach(({ x, label }, index) => {
+      const px = x * this.w;
+      gctx.fillStyle = index === 2 ? 'rgba(184, 155, 255, 0.82)' : 'rgba(214, 219, 239, 0.46)';
+      gctx.fillText(label, px, 9);
+      if (index > 0) {
+        gctx.strokeStyle = 'rgba(154, 163, 205, 0.10)';
+        gctx.setLineDash([2, 5]);
+        gctx.beginPath();
+        gctx.moveTo(px - this.w * 0.095, 27);
+        gctx.lineTo(px - this.w * 0.095, this.h - 18);
+        gctx.stroke();
+        gctx.setLineDash([]);
+      }
+    });
     this.gridCached = true;
   }
 
-  curve(a, b, edgeIndex = 0) {
-    const p1 = this.pos(this.nodes[a]);
-    const p2 = this.pos(this.nodes[b]);
-    const dx = p2.x - p1.x;
-    const dy = p2.y - p1.y;
-    const horizontal = Math.abs(dx) >= Math.abs(dy);
-    // 同层连线轻轻拱起，跨层连线加入横向偏移，避免所有线都像直角电路。
-    const bend = horizontal ? 0.34 : 0.22;
-    const amplitude = horizontal
-      ? Math.min(13, Math.max(7, Math.abs(dx) * 0.08))
-      : Math.min(16, Math.max(8, Math.abs(dy) * 0.08));
-    const direction = edgeIndex % 2 === 0 ? -1 : 1;
+  nodeScale(node) {
+    return (node.size + 1.2) * Math.min(1, Math.max(0.72, this.w / 560));
+  }
+
+  nodeHue(node) {
+    // 保留每个模块很轻的色相差异；饱和度统一在绘制阶段控制，避免变成彩虹色。
+    return node.hue ?? NEUTRAL_HUE;
+  }
+
+  curve(a, b) {
+    const source = this.pos(this.nodes[a]);
+    const target = this.pos(this.nodes[b]);
+    const sourceExtent = this.nodeExtent(this.nodes[a], this.nodeScale(this.nodes[a]));
+    const targetExtent = this.nodeExtent(this.nodes[b], this.nodeScale(this.nodes[b]));
+    const direction = Math.sign(target.x - source.x) || 1;
+    const sameColumn = Math.abs(target.x - source.x) < 1;
+    if (sameColumn) {
+      const sideX = source.x + sourceExtent / 2 + 18;
+      const start = { x: source.x + sourceExtent / 2, y: source.y };
+      const end = { x: target.x + targetExtent / 2, y: target.y };
+      return {
+        p1: start,
+        p2: end,
+        points: [start, { x: sideX, y: start.y }, { x: sideX, y: end.y }, end],
+      };
+    }
+    const start = { x: source.x + direction * sourceExtent / 2, y: source.y };
+    const end = { x: target.x - direction * targetExtent / 2, y: target.y };
+    const elbowX = start.x + (end.x - start.x) * 0.5;
+    // 正交连线更像真正的树：先从父节点横向出线，再沿共享竖干分叉，最后进入子节点。
     return {
-      p1,
-      p2,
-      c1: {
-        x: p1.x + dx * bend + (horizontal ? 0 : amplitude * direction),
-        y: p1.y + dy * 0.08 + (horizontal ? amplitude * direction : 0),
-      },
-      c2: {
-        x: p2.x - dx * bend + (horizontal ? 0 : amplitude * direction),
-        y: p2.y - dy * 0.08 + (horizontal ? amplitude * direction : 0),
-      },
+      p1: start,
+      p2: end,
+      points: [start, { x: elbowX, y: start.y }, { x: elbowX, y: end.y }, end],
     };
   }
 
-  pointOnCurve(c, progress) {
-    const q = 1 - progress;
-    return {
-      x:
-        q ** 3 * c.p1.x +
-        3 * q ** 2 * progress * c.c1.x +
-        3 * q * progress ** 2 * c.c2.x +
-        progress ** 3 * c.p2.x,
-      y:
-        q ** 3 * c.p1.y +
-        3 * q ** 2 * progress * c.c1.y +
-        3 * q * progress ** 2 * c.c2.y +
-        progress ** 3 * c.p2.y,
-    };
+  pointOnPath(path, progress) {
+    const lengths = [];
+    let total = 0;
+    for (let i = 1; i < path.points.length; i++) {
+      const a = path.points[i - 1];
+      const b = path.points[i];
+      const length = Math.hypot(b.x - a.x, b.y - a.y);
+      lengths.push(length);
+      total += length;
+    }
+    let remaining = total * progress;
+    for (let i = 1; i < path.points.length; i++) {
+      const a = path.points[i - 1];
+      const b = path.points[i];
+      const length = lengths[i - 1];
+      if (remaining <= length || i === path.points.length - 1) {
+        const ratio = length ? Math.min(1, remaining / length) : 0;
+        return { x: a.x + (b.x - a.x) * ratio, y: a.y + (b.y - a.y) * ratio };
+      }
+      remaining -= length;
+    }
+    return path.p2;
   }
 
-  drawArrow(c, progress, hue, alpha = 0.46) {
-    const p = this.pointOnCurve(c, progress);
-    const next = this.pointOnCurve(c, Math.min(1, progress + 0.025));
-    const angle = Math.atan2(next.y - p.y, next.x - p.x);
+  drawArrow(c, progress, hue, alpha = 0.46, reverse = false) {
+    const p = this.pointOnPath(c, progress);
+    const next = this.pointOnPath(c, Math.min(1, progress + 0.025));
+    const angle = Math.atan2(next.y - p.y, next.x - p.x) + (reverse ? Math.PI : 0);
     const size = 4;
     const { ctx } = this;
     ctx.save();
@@ -472,139 +297,98 @@ class YishePyramidCanvas {
 
   drawConnections() {
     const { ctx, t } = this;
-    this.connections.forEach(([a, b], edgeIndex) => {
+    this.connections.forEach(([a, b, kind], edgeIndex) => {
       const parentLink = this.nodes[b].parent === this.nodes[a].id;
+      const communicationLink = kind === 'communication';
       const hoverLink =
         this.hoveredId === this.nodes[a].id || this.hoveredId === this.nodes[b].id;
-      const c = this.curve(a, b, edgeIndex);
+      const c = this.curve(a, b);
       ctx.beginPath();
-      ctx.moveTo(c.p1.x, c.p1.y);
-      ctx.bezierCurveTo(c.c1.x, c.c1.y, c.c2.x, c.c2.y, c.p2.x, c.p2.y);
-      const grad = ctx.createLinearGradient(c.p1.x, c.p1.y, c.p2.x, c.p2.y);
-      const alpha = hoverLink ? 0.72 : parentLink ? 0.34 : 0.14;
-      grad.addColorStop(0, `hsla(${this.nodes[a].hue}, 55%, 60%, ${alpha})`);
-      grad.addColorStop(1, `hsla(${this.nodes[b].hue}, 55%, 60%, ${alpha})`);
-      ctx.strokeStyle = hoverLink ? WORKFLOW_BRAND : grad;
-      ctx.setLineDash(parentLink ? [] : [2, 4]);
-      ctx.lineWidth = hoverLink ? 2.25 : parentLink ? 1.7 : 1.05;
+      ctx.moveTo(c.points[0].x, c.points[0].y);
+      c.points.slice(1).forEach((point) => ctx.lineTo(point.x, point.y));
+      const alpha = hoverLink ? 0.72 : parentLink ? 0.34 : communicationLink ? 0.16 : 0.24;
+      ctx.strokeStyle = hoverLink
+        ? WORKFLOW_BRAND
+        : communicationLink
+        ? `rgba(153, 164, 190, ${alpha})`
+        : `rgba(177, 185, 210, ${alpha})`;
+      ctx.setLineDash(communicationLink ? [4, 5] : []);
+      ctx.lineWidth = hoverLink ? 2.25 : communicationLink ? 1 : 1.45;
       ctx.stroke();
       ctx.setLineDash([]);
-      this.drawArrow(c, 0.87, this.nodes[b].hue, hoverLink ? 0.8 : 0.46);
+      if (communicationLink) {
+        // 双向箭头表示节点间是持续通信，而非单向依赖。
+        this.drawArrow(c, 0.17, NEUTRAL_HUE, hoverLink ? 0.8 : 0.38);
+        this.drawArrow(c, 0.83, NEUTRAL_HUE, hoverLink ? 0.8 : 0.38, true);
+      } else {
+        this.drawArrow(c, 0.87, NEUTRAL_HUE, hoverLink ? 0.8 : 0.46);
+      }
 
-      // 只给前 24 条边配置粒子，直接按下标读取，避免每帧 find。
       const particle = this.particles[edgeIndex];
       if (particle) {
         const progress = (particle.t + t * particle.speed) % 1;
-        const point = this.pointOnCurve(c, progress);
+        const point = this.pointOnPath(c, progress);
         ctx.beginPath();
         ctx.arc(point.x, point.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${particle.hue}, 75%, 68%, ${hoverLink ? 1 : 0.85})`;
+        ctx.fillStyle = hoverLink
+          ? `hsla(${WORKFLOW_HUE}, 70%, 72%, 1)`
+          : `rgba(190, 198, 220, ${communicationLink ? 0.42 : 0.72})`;
         ctx.fill();
       }
     });
   }
 
   nodeExtent(node, s) {
-    return node.shape === "circle" ? s * 2 : s * 1.65;
+    // 所有节点统一为带圆角的方形卡片，尺寸只通过层级大小区分。
+    return s * 1.8;
+  }
+
+  nodeHeight(node, extent) {
+    return extent;
   }
 
   nodePath(node, p, s, multiplier = 1) {
     const { ctx } = this;
     const extent = this.nodeExtent(node, s) * multiplier;
     ctx.beginPath();
-    if (node.shape === "circle") {
-      ctx.arc(p.x, p.y, extent / 2, 0, Math.PI * 2);
-    } else {
-      ctx.rect(p.x - extent / 2, p.y - extent / 2, extent, extent);
-    }
-  }
-
-  drawSquareAccents(node, p, extent) {
-    if (node.shape !== "square") return;
-    const { ctx } = this;
-    const half = extent / 2;
-    const inset = extent * 0.12;
-    const corner = extent * 0.17;
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.strokeStyle = `hsla(${node.hue}, 70%, 72%, 0.62)`;
-    ctx.lineWidth = 1.15;
-    ctx.beginPath();
-    // 四角只强调结构，不改变正方形轮廓。
-    ctx.moveTo(-half + inset, -half + inset + corner);
-    ctx.lineTo(-half + inset, -half + inset);
-    ctx.lineTo(-half + inset + corner, -half + inset);
-    ctx.moveTo(half - inset - corner, -half + inset);
-    ctx.lineTo(half - inset, -half + inset);
-    ctx.lineTo(half - inset, -half + inset + corner);
-    ctx.moveTo(-half + inset, half - inset - corner);
-    ctx.lineTo(-half + inset, half - inset);
-    ctx.lineTo(-half + inset + corner, half - inset);
-    ctx.moveTo(half - inset - corner, half - inset);
-    ctx.lineTo(half - inset, half - inset);
-    ctx.lineTo(half - inset, half - inset - corner);
-    ctx.stroke();
-    ctx.restore();
+    const radius = Math.max(5, extent * 0.2);
+    ctx.roundRect(p.x - extent / 2, p.y - extent / 2, extent, extent, radius);
   }
 
   drawNode(node) {
     const { ctx, t } = this;
     const p = this.pos(node);
     const pulse = Math.sin(t * 0.0008 + node.x * 5) * 1.2;
-    // 5 列在窄屏中仍保持呼吸感；桌面端使用节点定义的重点层级尺寸。
+    // 横向多阶段在窄屏中等比缩放；桌面端保留每个中枢节点的视觉权重。
     const densityScale = Math.min(1, Math.max(0.72, this.w / 560));
     const s = (node.size + pulse) * densityScale;
-    const hue = node.hue;
+    const hue = this.nodeHue(node);
     const extent = this.nodeExtent(node, s);
+    const height = this.nodeHeight(node, extent);
     const isParent = this.nodes.some((item) => item.parent === node.id);
     const prominent = Boolean(node.ring || isParent || node.level === "root");
     const hovered = node.id === this.hoveredId;
     const related = this.isRelated(node);
 
-    // 用径向渐变模拟极轻的层次，避免高成本阴影。
-    const glow = ctx.createRadialGradient(
-      p.x,
-      p.y,
-      s * 0.35,
-      p.x,
-      p.y,
-      s * 1.9,
-    );
-    glow.addColorStop(0, `hsla(${hue}, 55%, 55%, 0.10)`);
-    glow.addColorStop(1, `hsla(${hue}, 55%, 55%, 0)`);
-    this.nodePath(node, p, s, 1.8);
-    ctx.fillStyle = glow;
-    ctx.fill();
-
-    if (node.ring) {
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(t * 0.0005);
-      ctx.beginPath();
-      ctx.arc(0, 0, s * 0.98, -0.7, 1.8);
-      ctx.strokeStyle = `hsla(${hue}, 60%, 62%, 0.42)`;
-      ctx.lineWidth = 1.1;
-      ctx.stroke();
-      ctx.restore();
-    }
-
     this.nodePath(node, p, s);
-    const core = ctx.createLinearGradient(
+    // 节点保持克制：用同一套深色底，只让各模块的色相在底色和边框中轻轻出现。
+    const card = ctx.createLinearGradient(
       p.x - extent / 2,
       p.y - extent / 2,
       p.x + extent / 2,
       p.y + extent / 2,
     );
-    core.addColorStop(0, `hsla(${hue}, 28%, 17%, 0.96)`);
-    core.addColorStop(1, "rgba(12, 14, 22, 0.98)");
-    ctx.fillStyle = core;
+    card.addColorStop(0, `hsla(${hue}, ${prominent ? 32 : 22}%, ${prominent ? 19 : 15}%, 0.98)`);
+    card.addColorStop(1, '#10151d');
+    ctx.fillStyle = card;
     ctx.fill();
-    ctx.strokeStyle = `hsla(${hue}, 58%, 62%, 0.34)`;
+    ctx.strokeStyle = prominent
+      ? `hsla(${hue}, 54%, 72%, 0.62)`
+      : `hsla(${hue}, 34%, 72%, 0.42)`;
     ctx.lineWidth = hovered ? 2.4 : prominent ? 1.7 : 1.2;
     ctx.stroke();
-    this.drawSquareAccents(node, p, extent);
 
-    // Hover 采用局部轮廓和径向渐变反馈，不缩放、不位移节点，避免画布整体跳动。
+    // Hover 只增强局部轮廓与文字，不缩放、不位移节点，避免画布整体跳动。
     if (hovered) {
       this.nodePath(node, p, s, 1.14);
       ctx.strokeStyle = WORKFLOW_BRAND;
@@ -621,26 +405,48 @@ class YishePyramidCanvas {
       : prominent
       ? "rgba(255, 255, 255, 0.92)"
       : "rgba(255, 255, 255, 0.82)";
-    ctx.fillText(node.title, p.x, p.y + extent / 2 + 12);
+    ctx.fillText(node.title, p.x, p.y + height / 2 + 12);
     ctx.font = `${prominent ? 700 : 650} ${7.2 * fontScale}px Inter, -apple-system, sans-serif`;
     ctx.fillStyle = `hsla(${hue}, 52%, 72%, ${hovered ? 0.9 : prominent ? 0.72 : related ? 0.72 : 0.62})`;
-    ctx.fillText(node.subtitle, p.x, p.y + extent / 2 + 22);
+    ctx.fillText(node.subtitle, p.x, p.y + height / 2 + 22);
   }
 
   drawIcon(node, p, s, t, emphasized = false) {
     const { ctx } = this;
-    const scale = s * 0.9; // 图标保持占节点约 90%，避免再次出现图标过小。
-    const hue = node.hue;
+    const scale = s * 1.08; // 图标是节点的视觉重点，尽量填满方形卡片内部。
+    const hue = this.nodeHue(node);
     ctx.save();
     ctx.translate(p.x, p.y);
     // 图标使用更高的笔画权重，确保在深色背景和小尺寸节点中仍然清晰。
-    ctx.strokeStyle = `hsla(${hue}, 64%, 74%, ${emphasized ? 1 : 0.96})`;
-    ctx.fillStyle = `hsla(${hue}, 64%, 68%, ${emphasized ? 0.3 : 0.24})`;
+    const iconHue = this.nodeHue(node);
+    ctx.strokeStyle = `hsla(${iconHue}, ${emphasized ? 68 : 48}%, ${emphasized ? 84 : 78}%, 1)`;
+    ctx.fillStyle = `hsla(${iconHue}, ${emphasized ? 64 : 44}%, ${emphasized ? 72 : 70}%, ${emphasized ? 0.28 : 0.16})`;
     ctx.lineWidth = Math.max(2.2, s * (emphasized ? 0.1 : 0.09));
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
 
     switch (node.type) {
+      case "free":
+        // 星芒与加号：表达“先免费创作”，不是把创作能力设成门槛。
+        ctx.beginPath();
+        ctx.moveTo(0, -scale * 0.42);
+        ctx.lineTo(scale * 0.1, -scale * 0.1);
+        ctx.lineTo(scale * 0.42, 0);
+        ctx.lineTo(scale * 0.1, scale * 0.1);
+        ctx.lineTo(0, scale * 0.42);
+        ctx.lineTo(-scale * 0.1, scale * 0.1);
+        ctx.lineTo(-scale * 0.42, 0);
+        ctx.lineTo(-scale * 0.1, -scale * 0.1);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(scale * 0.48, -scale * 0.32);
+        ctx.lineTo(scale * 0.48, -scale * 0.08);
+        ctx.moveTo(scale * 0.36, -scale * 0.2);
+        ctx.lineTo(scale * 0.6, -scale * 0.2);
+        ctx.stroke();
+        break;
       case "idea":
         ctx.beginPath();
         ctx.arc(0, -scale * 0.08, scale * 0.28, 0, Math.PI * 2);
@@ -757,6 +563,24 @@ class YishePyramidCanvas {
           );
           ctx.fill();
         }
+        break;
+      case "personalize":
+        // 用户画像 + 调整旋钮：表达根据偏好生成独特结果。
+        ctx.beginPath();
+        ctx.arc(0, -scale * 0.22, scale * 0.16, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.arc(0, scale * 0.2, scale * 0.29, Math.PI, Math.PI * 2);
+        ctx.stroke();
+        [-0.28, 0, 0.28].forEach((y, index) => {
+          ctx.beginPath();
+          ctx.moveTo(-scale * 0.42, scale * y);
+          ctx.lineTo(scale * 0.42, scale * y);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(scale * (index === 1 ? 0.18 : -0.12), scale * y, scale * 0.07, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+        });
         break;
       case "workflow":
         ctx.fillStyle = `hsla(${hue}, 65%, 68%, 0.7)`;
@@ -886,19 +710,35 @@ class YishePyramidCanvas {
         ctx.closePath();
         ctx.stroke();
         break;
-      case "supply":
-        ctx.strokeRect(-scale * 0.42, -scale * 0.1, scale * 0.84, scale * 0.48);
+      case "deliver":
+        // 包裹 + 箭头（全球履约）
+        ctx.strokeRect(-scale * 0.35, -scale * 0.2, scale * 0.7, scale * 0.45);
         ctx.beginPath();
-        ctx.moveTo(-scale * 0.5, -scale * 0.1);
-        ctx.lineTo(0, -scale * 0.45);
-        ctx.lineTo(scale * 0.5, -scale * 0.1);
-        ctx.moveTo(0, -scale * 0.45);
-        ctx.lineTo(0, scale * 0.38);
+        ctx.moveTo(0, -scale * 0.2);
+        ctx.lineTo(0, scale * 0.25);
+        ctx.moveTo(-scale * 0.2, scale * 0.05);
+        ctx.lineTo(0, scale * 0.25);
+        ctx.lineTo(scale * 0.2, scale * 0.05);
         ctx.stroke();
-        ctx.fillRect(-scale * 0.1, scale * 0.12, scale * 0.2, scale * 0.26);
+        // 飞行弧线
+        ctx.beginPath();
+        ctx.moveTo(scale * 0.15, -scale * 0.32);
+        ctx.quadraticCurveTo(scale * 0.4, -scale * 0.5, scale * 0.5, -scale * 0.28);
+        ctx.stroke();
+        break;
+      case "customer":
+        // 人形轮廓：结果最终回到真实用户，而不是停留在技术链路中。
+        ctx.beginPath();
+        ctx.arc(0, -scale * 0.2, scale * 0.18, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(0, scale * 0.28, scale * 0.34, Math.PI, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
         break;
       case "goal": {
-        // 星芒 + 勾选：表达“好的设计产品”是系统最终产出，而不是物流终点。
+        // 星芒 + 勾选：表达'好的设计产品'是系统最终产出，而不是物流终点。
         const points = 8;
         ctx.beginPath();
         for (let i = 0; i < points; i++) {

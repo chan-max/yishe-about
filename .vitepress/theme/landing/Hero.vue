@@ -27,12 +27,12 @@ const ecosystemNodes = [
       <div
         class="flex flex-col gap-6 items-center md:items-start text-center md:text-left"
       >
-        <h1 class="text-white text-pretty max-w-[28rem]">
-          衣设<span class="text-[#6900ff]"> · 下一代 AI 创意设计生态</span>
+        <h1 class="text-white text-pretty max-w-[28rem] hero-title">
+          衣设<span> · 个性化定制社区</span>
         </h1>
 
-        <p class="text-white/70 md:text-lg max-w-[30rem] text-pretty leading-relaxed">
-          从一串灵感到一件印花商品，从一张草图到全域推广。衣设打通<span class="text-white font-medium">创意设计、智能软件、自动化智造</span>全链路，让每一个创意都能秒级变为现实。
+        <p class="text-white/70 md:text-lg max-w-[30rem] text-pretty leading-relaxed hero-copy">
+          从一串灵感到一件专属商品，从一张草图到全域推广。衣设坚持<span>设计优先免费、社区共创、POD 按需生产</span>，用 AI 与自动化让每个人都能创作、分享并实现自己的独特设计。
         </p>
 
         <p class="text-white/40 text-sm max-w-[28rem] text-pretty font-mono">
@@ -44,7 +44,7 @@ const ecosystemNodes = [
             href="http://admin.1s.design"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn-image-bg inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium transition-all hover:scale-105"
+            class="hero-primary-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium transition-all hover:scale-105"
           >
             开启创作 →
           </a>
@@ -52,7 +52,7 @@ const ecosystemNodes = [
             href="https://1s.design"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white/80 font-medium border border-white/15 hover:border-white/30 hover:text-white transition-all"
+            class="hero-secondary-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white/80 font-medium border hover:text-white transition-all"
           >
             浏览商城
           </a>
@@ -61,12 +61,12 @@ const ecosystemNodes = [
 
       <CodeGroup
         :tabs="ecosystemNodes"
-        class="hidden md:block w-full -mb-[16px] relative z-10"
+        class="ecosystem-code-group hidden md:block w-full -mb-[16px] relative z-10"
         style="
-          --vp-code-tab-bg: rgba(105, 0, 255, 0.08);
+          --vp-code-tab-bg: rgba(128, 139, 166, 0.08);
           --vp-code-block-bg: rgba(0, 0, 0, 0.3);
-          --vp-code-tab-divider: rgba(105, 0, 255, 0.2);
-          border: 1px solid rgba(105, 0, 255, 0.15);
+          --vp-code-tab-divider: rgba(154, 164, 190, 0.18);
+          border: 1px solid rgba(154, 164, 190, 0.18);
           border-radius: 12px;
           background: rgba(10, 10, 10, 0.6);
         "
@@ -79,3 +79,61 @@ const ecosystemNodes = [
     </div>
   </div>
 </template>
+
+<style scoped>
+.hero-title span {
+  background: linear-gradient(110deg, #c8baff 0%, #a8a0d8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-copy span {
+  color: #c7c0ed;
+  font-weight: 600;
+  text-shadow: 0 0 14px rgba(128, 104, 220, 0.12);
+}
+
+.hero-primary-btn {
+  border: 1px solid rgba(183, 143, 255, 0.55);
+  background: rgba(105, 0, 255, 0.72);
+  box-shadow: 0 8px 28px rgba(105, 0, 255, 0.16);
+}
+
+.hero-primary-btn:hover {
+  box-shadow: 0 10px 34px rgba(126, 98, 220, 0.26);
+}
+
+.hero-secondary-btn {
+  border-color: rgba(153, 164, 190, 0.3);
+  background: rgba(128, 139, 166, 0.08);
+}
+
+.hero-secondary-btn:hover {
+  border-color: rgba(193, 184, 245, 0.62);
+  background: rgba(105, 0, 255, 0.12);
+}
+
+.ecosystem-code-group :deep(.vp-code-group) {
+  --vp-code-tab-bg: rgba(128, 139, 166, 0.1) !important;
+  --vp-code-block-bg: rgba(5, 13, 18, 0.72) !important;
+  --vp-code-tab-divider: rgba(154, 164, 190, 0.18) !important;
+  --vp-code-tab-text-color: rgba(224, 229, 242, 0.58) !important;
+  --vp-code-tab-hover-text-color: #d0c8f5 !important;
+  --vp-code-tab-active-text-color: #f2efff !important;
+  --vp-code-tab-active-bar-color: #a88aff !important;
+  border: 1px solid rgba(154, 164, 190, 0.2);
+  border-radius: 12px;
+  background: rgba(12, 14, 21, 0.72);
+  overflow: hidden;
+}
+
+.ecosystem-code-group :deep(.tabs label:nth-of-type(1)::after),
+.ecosystem-code-group :deep(.tabs label:nth-of-type(4)::after) {
+  background-color: rgba(168, 138, 255, 0.9);
+}
+
+.ecosystem-code-group :deep(.language-bash code) {
+  color: #c8c1eb !important;
+}
+</style>
